@@ -24,7 +24,7 @@
             <!-- Navigation-->
             <nav class="navbar navbar-expand-lg navbar-light bg-white py-3">
                 <div class="container px-5">
-                    <a class="navbar-brand" href="index.html"><span class="fw-bolder text-primary">Erlang Calculator</span></a>
+                    <a class="navbar-brand" href="index.html"><span class="fw-bolder text-primary">Title Bar</span></a>
                     {{-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav ms-auto mb-2 mb-lg-0 small fw-bolder">
@@ -33,32 +33,34 @@
                     </div> --}}
                 </div>
             </nav>
-            <!-- Header-->
-            <header class="py-5">
+            <!-- Main Section-->
+            <section class="py-5">
                 <div class="container px-5 pb-5">
                     <div class="row gx-5 align-items-center">
                         <div class="col-xxl-5">
-                            <!-- Header text content-->
                             <div class="text-center text-xxl-start">
-                                <div class="badge bg-gradient-primary-to-secondary text-white mb-4"><div class="text-uppercase">About This Calculator</div></div>
-                                <h1 class="display-3 fw-bolder mb-5"><span class="text-gradient d-inline">Heading</span></h1>
+                                <h1 class="display-3 fw-bolder mb-5"><span class="text-gradient d-inline">Erlang Calculator</span></h1>
+                                <div class="badge bg-gradient-primary-to-secondary text-white mb-2"><div class="text-uppercase">About This Calculator</div></div>
+                                <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+                                <div class="badge bg-gradient-primary-to-secondary text-white mb-2"><div class="text-uppercase">About The Author</div></div>
+                                <p>Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur.</p>
                                 <div class="d-grid gap-3 d-sm-flex justify-content-sm-center justify-content-xxl-start mb-3">
-                                    <a class="btn btn-primary btn-lg px-5 py-3 me-sm-3 fs-6 fw-bolder" href="resume.html">Download Resume</a>
+                                    <a class="btn btn-primary btn-lg px-5 py-3 me-sm-3 fs-6 fw-bolder" href="#">Download Resume</a>
                                 </div>
                             </div>
                         </div>
                         <div class="col-xxl-7">
-                            <!-- Header profile picture-->
+                            <!-- Calculator Section-->
                             <div class="d-flex justify-content-center mt-5 mt-xxl-0">
                                 <div class="profile bg-gradient-primary-to-secondary">
-                
+                                    <div id="root"></div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </header>
-            <!-- Main Section-->
+            </section>
+            <!-- Secondary Section-->
             <section class="bg-light py-5">
                 <div class="container px-5">
                     <div class="row gx-5 justify-content-center">
@@ -77,5 +79,7 @@
         </footer>
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+        {{-- App JS --}}
+        <script src="{{ asset('js/app.js') }}"></script>
     </body>
 </html>
