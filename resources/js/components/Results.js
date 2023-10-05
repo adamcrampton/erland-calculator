@@ -13,7 +13,7 @@ class Results extends Component {
                         Results
                     </button>
                 </div>
-                <div id="collapse-results" className="card-body accordion-collapse collapse">
+                <div id="collapse-results" className={`card-body accordion-collapse collapse ${ this.props.visible && 'show'}`}>
                     <div id="card-results">
                         <p className="card-text pb-2 border-bottom"></p>
                     </div>

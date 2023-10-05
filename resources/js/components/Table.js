@@ -23,7 +23,6 @@ class Table extends Component {
             'minutes', 'hours', 'weeks', 'months'
         ];
 
-        this.handleCalculation = this.handleCalculation.bind(this);
         this.handleFieldChange = this.handleFieldChange.bind(this);
         this.handleTimePeriodUnitChange = this.handleTimePeriodUnitChange.bind(this);
     }
@@ -238,7 +237,12 @@ class Table extends Component {
                     </tbody>
                 </table>
                 <div className="text-center">
-                    <button className="btn btn-sm btn-success" onClick={ this.updateCalc }>Calculate</button>
+                    <button 
+                        className="btn btn-sm btn-success" 
+                        onClick={ this.props.triggerCalculated }
+                    >
+                        Calculate
+                    </button>
                 </div>
             </div>
         );
@@ -275,9 +279,6 @@ class Table extends Component {
                 ...this.state.selections, timePeriodUnits: evt.target.value
             }
         });
-    }
-    handleCalculation() {
-
     }
 }
 

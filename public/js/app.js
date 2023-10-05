@@ -65,7 +65,11 @@ var App = /*#__PURE__*/function (_Component) {
     var _this;
     _classCallCheck(this, App);
     _this = _super.call(this, props);
-    _this.state = {};
+    _this.state = {
+      cardVisible: true,
+      resultsVisible: false
+    };
+    _this.showResults = _this.showResults.bind(_assertThisInitialized(_this));
     return _this;
   }
   _createClass(App, [{
@@ -73,7 +77,20 @@ var App = /*#__PURE__*/function (_Component) {
     value: function render() {
       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
         className: "accordion w-100",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_Card__WEBPACK_IMPORTED_MODULE_1__["default"], {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_Results__WEBPACK_IMPORTED_MODULE_2__["default"], {})]
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_Card__WEBPACK_IMPORTED_MODULE_1__["default"], {
+          visible: this.state.cardVisible,
+          showResults: this.showResults
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_Results__WEBPACK_IMPORTED_MODULE_2__["default"], {
+          visible: this.state.resultsVisible
+        })]
+      });
+    }
+  }, {
+    key: "showResults",
+    value: function showResults() {
+      this.setState({
+        cardVisible: false,
+        resultsVisible: true
       });
     }
   }]);
@@ -122,6 +139,7 @@ var Card = /*#__PURE__*/function (_Component) {
     _classCallCheck(this, Card);
     _this = _super.call(this, props);
     _this.state = {};
+    _this.triggerCalculated = _this.triggerCalculated.bind(_assertThisInitialized(_this));
     return _this;
   }
   _createClass(Card, [{
@@ -142,16 +160,23 @@ var Card = /*#__PURE__*/function (_Component) {
           })
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
           id: "collapse-form",
-          className: "card-body accordion-collapse collapse show",
+          className: "card-body accordion-collapse collapse ".concat(this.props.visible && 'show'),
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
             id: "card-form",
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
               className: "card-text pb-2 border-bottom",
               children: "Set fields to calculate staff numbers required to reach an agreed service level."
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_Table__WEBPACK_IMPORTED_MODULE_1__["default"], {})]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_Table__WEBPACK_IMPORTED_MODULE_1__["default"], {
+              triggerCalculated: this.triggerCalculated
+            })]
           })
         })]
       });
+    }
+  }, {
+    key: "triggerCalculated",
+    value: function triggerCalculated() {
+      this.props.showResults();
     }
   }]);
   return Card;
@@ -214,7 +239,7 @@ var Results = /*#__PURE__*/function (_Component) {
           })
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
           id: "collapse-results",
-          className: "card-body accordion-collapse collapse",
+          className: "card-body accordion-collapse collapse ".concat(this.props.visible && 'show'),
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
             id: "card-results",
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("p", {
@@ -286,7 +311,6 @@ var Table = /*#__PURE__*/function (_Component) {
       weekWorkHours: 40
     };
     _this.units = ['minutes', 'hours', 'weeks', 'months'];
-    _this.handleCalculation = _this.handleCalculation.bind(_assertThisInitialized(_this));
     _this.handleFieldChange = _this.handleFieldChange.bind(_assertThisInitialized(_this));
     _this.handleTimePeriodUnitChange = _this.handleTimePeriodUnitChange.bind(_assertThisInitialized(_this));
     return _this;
@@ -545,7 +569,7 @@ var Table = /*#__PURE__*/function (_Component) {
           className: "text-center",
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("button", {
             className: "btn btn-sm btn-success",
-            onClick: this.updateCalc,
+            onClick: this.props.triggerCalculated,
             children: "Calculate"
           })
         })]
@@ -587,9 +611,6 @@ var Table = /*#__PURE__*/function (_Component) {
         })
       });
     }
-  }, {
-    key: "handleCalculation",
-    value: function handleCalculation() {}
   }]);
   return Table;
 }(react__WEBPACK_IMPORTED_MODULE_0__.Component);
