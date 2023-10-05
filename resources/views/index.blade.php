@@ -52,7 +52,7 @@
                         <div class="col-xxl-7">
                             <!-- Calculator Section-->
                             <div class="d-flex justify-content-center mt-5 mt-xxl-0">
-                                <div id="root"></div>
+                                <div class="flex-grow-1" id="root"></div>
                             </div>
                         </div>
                     </div>

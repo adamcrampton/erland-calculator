@@ -4,10 +4,19 @@ class Table extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            averagePatience: 0,
+            handleTime: 0,
+            maxOccupancy: 0,
             incomingContacts: 0,
+            reportInterval: 0,
+            serviceLevel: 0,
+            shrinkage: 0,
+            targetAnswerTime: 0,
+            timePeriod: 0,
             selections: {
                 timePeriodUnits: 'minutes'
-            }
+            },
+            weekWorkHours: 40
         };
 
         this.units = [
@@ -21,7 +30,7 @@ class Table extends Component {
     render() {
         return (
             <div>
-                <table className="table">
+                <table className="table table-calculator">
                     <tbody>
                         <tr>
                             <td>
@@ -53,14 +62,15 @@ class Table extends Component {
                                         name="timePeriod"
                                         type="number"
                                         min="0"
+                                        onChange={ this.handleFieldChange }
+                                        value={ this.state.timePeriod }
                                     />
                                     <select 
-                                        className="form-control form-control-sm"
+                                        className="form-control form-control-sm form-select"
                                         selected={ this.state.selections.timePeriodUnits }
                                         onChange={ this.handleTimePeriodUnitChange }
                                     >
                                         { this.units.map(unit => ( <option key={unit} value={unit}>{unit}</option> )) }
-                                            
                                     </select>
                                 </div>
                             </td>
@@ -72,17 +82,37 @@ class Table extends Component {
                                 </label>
                             </td>
                             <td>
-                               
+                                <div className="input-group">
+                                    <input 
+                                        className="form-control form-control-sm"
+                                        name="handleTime"
+                                        type="number"
+                                        min="0"
+                                        onChange={ this.handleFieldChange }
+                                        value={ this.state.handleTime }
+                                    />
+                                     <span className="input-group-text">Seconds</span>
+                                </div>
                             </td>
                         </tr>
                         <tr>
                             <td>
                                 <label className="form-label">
-                                    <strong>Required Service Level %</strong>
+                                    <strong>Required Service Level</strong>
                                 </label>
                             </td>
                             <td>
-                               
+                                <div className="input-group">
+                                    <input 
+                                        className="form-control form-control-sm"
+                                        name="serviceLevel"
+                                        type="number"
+                                        min="0"
+                                        onChange={ this.handleFieldChange }
+                                        value={ this.state.serviceLevel }
+                                    />
+                                    <span className="input-group-text">%</span>
+                                </div>
                             </td>
                         </tr>
                         <tr>
@@ -92,7 +122,17 @@ class Table extends Component {
                                 </label>
                             </td>
                             <td>
-                               
+                                <div className="input-group">
+                                    <input 
+                                        className="form-control form-control-sm"
+                                        name="targetAnswerTime"
+                                        type="number"
+                                        min="0"
+                                        onChange={ this.handleFieldChange }
+                                        value={ this.state.targetAnswerTime }
+                                    />
+                                     <span className="input-group-text">Seconds</span>
+                                </div>
                             </td>
                         </tr>
                         <tr>
@@ -102,7 +142,17 @@ class Table extends Component {
                                 </label>
                             </td>
                             <td>
-                               
+                                <div className="input-group">
+                                    <input 
+                                        className="form-control form-control-sm"
+                                        name="maxOccupancy"
+                                        type="number"
+                                        min="0"
+                                        onChange={ this.handleFieldChange }
+                                        value={ this.state.maxOccupancy }
+                                    />
+                                    <span className="input-group-text">%</span>
+                                </div>
                             </td>
                         </tr>
                         <tr>
@@ -112,7 +162,17 @@ class Table extends Component {
                                 </label>
                             </td>
                             <td>
-                               
+                                <div className="input-group">
+                                    <input 
+                                        className="form-control form-control-sm"
+                                        name="shrinkage"
+                                        type="number"
+                                        min="0"
+                                        onChange={ this.handleFieldChange }
+                                        value={ this.state.shrinkage }
+                                    />
+                                    <span className="input-group-text">%</span>
+                                </div>
                             </td>
                         </tr>
                         <tr>
@@ -122,7 +182,17 @@ class Table extends Component {
                                 </label>
                             </td>
                             <td>
-                               
+                                <div className="input-group">
+                                    <input 
+                                        className="form-control form-control-sm"
+                                        name="averagePatience"
+                                        type="number"
+                                        min="0"
+                                        onChange={ this.handleFieldChange }
+                                        value={ this.state.averagePatience }
+                                    />
+                                    <span className="input-group-text">seconds</span>
+                                </div>
                             </td>
                         </tr>
                         <tr>
@@ -132,7 +202,17 @@ class Table extends Component {
                                 </label>
                             </td>
                             <td>
-                               
+                                <div className="input-group">
+                                    <input 
+                                        className="form-control form-control-sm"
+                                        name="weekWorkHours"
+                                        type="number"
+                                        min="0"
+                                        onChange={ this.handleFieldChange }
+                                        value={ this.state.weekWorkHours }
+                                    />
+                                    <span className="input-group-text">%</span>
+                                </div>
                             </td>
                         </tr>
                         <tr>
@@ -142,7 +222,17 @@ class Table extends Component {
                                 </label>
                             </td>
                             <td>
-                               
+                                <div className="input-group">
+                                    <input 
+                                        className="form-control form-control-sm"
+                                        name="reportInterval"
+                                        type="number"
+                                        min="0"
+                                        onChange={ this.handleFieldChange }
+                                        value={ this.state.reportInterval }
+                                    />
+                                    <span className="input-group-text">minutes</span>
+                                </div>
                             </td>
                         </tr>
                     </tbody>
