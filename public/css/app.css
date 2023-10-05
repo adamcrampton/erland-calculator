@@ -1,1 +1,3 @@
-
+#root .card.accordion-item .card-header {
+  padding: 0;
+}

@@ -10,17 +10,14 @@ class Card extends Component {
     }
     render() {
         return (
-            <div className="card">
-                <div className="card-header bg-primary text-white">
-                    <div className="row">
-                        <div className="col">Call Centre Erlang Calculator</div>
-                        <div className="col d-flex justify-content-end">
-                            <button className="btn btn-warning btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#card-form">Toggle</button>
-                        </div>
-                    </div>
+            <div className="card accordion-item">
+                <div className="card-header">
+                    <button className="bg-primary text-white accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-form" aria-expanded="true" aria-controls="collapse-form">
+                        Call Centre Erlang Calculator
+                    </button>
                 </div>
-                <div className="card-body">
-                    <div id="card-form" className="collapse show">
+                <div id="collapse-form" className="card-body accordion-collapse collapse show">
+                    <div id="card-form">
                         <p className="card-text pb-2 border-bottom">Set fields to calculate staff numbers required to reach an agreed service level.</p>
                         <Table />
                     </div>

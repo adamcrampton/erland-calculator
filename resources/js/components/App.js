@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Card from './Card';
+import Results from './Results';
 
 class App extends Component {
     constructor(props) {
@@ -10,8 +11,9 @@ class App extends Component {
     }
     render() {
         return (
-            <div className="w-100">
+            <div className="accordion w-100">
                 <Card />
+                <Results />
             </div>
         );
     }
