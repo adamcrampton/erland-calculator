@@ -22,9 +22,12 @@ class App extends Component {
     }
     showResults() {
         this.setState({ 
-            cardVisible: false,
-            resultsVisible: true 
+            // cardVisible: false,
+            // resultsVisible: true 
+
         });
+        const results = document.getElementById('collapse-results');
+        bootstrap.Collapse.getOrCreateInstance(results).toggle();
     }
 }
 

@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faChartPie, faHeadset, faPhone, faStopwatch } from '@fortawesome/free-solid-svg-icons'
 
 class Results extends Component {
     constructor(props) {
@@ -15,7 +17,37 @@ class Results extends Component {
                 </div>
                 <div id="collapse-results" className={`card-body accordion-collapse collapse ${ this.props.visible && 'show'}`}>
                     <div id="card-results">
-                        <p className="card-text pb-2 border-bottom"></p>
+                        <div className="result-icons w-100 text-center">
+                            <div className="row">
+                                <div className="col">
+                                    <span className="d-block fs-6 mb-2">Agents</span>
+                                    <FontAwesomeIcon icon={ faHeadset } size="4x" className="blue" />
+                                    <span className="d-block fs-3 mt-2"><strong>0</strong></span>
+                                </div>
+                                <div className="col">
+                                    <span className="d-block fs-6 mb-2">Service Level</span>
+                                    <FontAwesomeIcon icon={ faStopwatch } size="4x" className="pink" />
+                                    <span className="d-block fs-3 mt-2"><strong>0</strong>%</span>
+                                </div>
+                                <div className="col">
+                                    <span className="d-block fs-6 mb-2">Occupancy</span>
+                                    <FontAwesomeIcon icon={ faChartPie } size="4x" className="u-violet" />
+                                    <span className="d-block fs-3 mt-2"><strong>0</strong>%</span>
+                                </div>
+                                <div className="col">
+                                    <span className="d-block fs-6 mb-2">Calls</span>
+                                    <FontAwesomeIcon icon={ faPhone } size="4x" className="r-violet" />
+                                    <span className="d-block fs-3 mt-2"><strong>0</strong></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="result-summary mt-2">
+                            <h4 className="mt-3">Summary</h4>
+                            These calculations are based on <strong></strong> incoming calls over a period of <strong></strong> minutes.
+                            <h4 className="mt-3">Your Results</h4>
+                            <p className="card-text">The number of agents required is <strong></strong>, which includes a shrinkage factor of <strong></strong>.</p>
+                            <p className="card-text">Based on the above data, the Service Level Calculated is <strong></strong>, with an Average Speed To Answer of <strong></strong>.</p>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -34,7 +34,7 @@ class Table extends Component {
                         <tr>
                             <td>
                                 <label className="form-label">
-                                    <strong>Incoming contacts</strong>
+                                    <strong>Incoming Calls</strong>
                                 </label>
                             </td>
                             <td>
@@ -238,8 +238,12 @@ class Table extends Component {
                 </table>
                 <div className="text-center">
                     <button 
-                        className="btn btn-sm btn-success" 
+                        className="btn btn-sm btn-pink" 
                         onClick={ this.props.triggerCalculated }
+                        data-bs-toggle="collapse"
+                        data-bs-target="#collapse-form" 
+                        aria-expanded="true" 
+                        aria-controls="collapse-form"
                     >
                         Calculate
                     </button>
