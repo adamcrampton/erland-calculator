@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCircleQuestion } from '@fortawesome/free-solid-svg-icons'
 
 class Table extends Component {
     constructor(props) {
@@ -36,6 +38,7 @@ class Table extends Component {
                                 <label className="form-label">
                                     <strong>Incoming Calls</strong>
                                 </label>
+                                <button type="button" class="btn" data-bs-toggle="tooltip" data-bs-placement="top" title="Doot"><FontAwesomeIcon icon={ faCircleQuestion } size="1x" /></button>
                             </td>
                             <td>
                                 <input 

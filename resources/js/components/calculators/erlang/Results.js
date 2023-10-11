@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faChartPie, faHeadset, faPhone, faStopwatch } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChartPie, faHeadset, faPhone, faStopwatch } from '@fortawesome/free-solid-svg-icons';
 
 class Results extends Component {
     constructor(props) {
