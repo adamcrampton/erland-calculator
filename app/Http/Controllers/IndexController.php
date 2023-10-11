@@ -8,8 +8,6 @@ class IndexController extends Controller
 {
     public function index()
     {
-        // return response()->json('It works', 200);
-
-        return view('index', []);
+        return redirect()->route('toolkit.calculators.erlang.index');
     }
 }
