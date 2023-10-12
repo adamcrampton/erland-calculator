@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCircleQuestion } from '@fortawesome/free-solid-svg-icons'
+import CommonPopover from '../../common/ui/CommonPopover';
 
 class Table extends Component {
     constructor(props) {
@@ -38,7 +37,13 @@ class Table extends Component {
                                 <label className="form-label">
                                     <strong>Incoming Calls</strong>
                                 </label>
-                                <button type="button" class="btn" data-bs-toggle="tooltip" data-bs-placement="top" title="Doot"><FontAwesomeIcon icon={ faCircleQuestion } size="1x" /></button>
+                                <CommonPopover
+                                    headingId="newHeading"
+                                    headingClass="h3"  
+                                    headingContent="Heading Text"
+                                    bodyContent="Some text for the body"
+                                    placement="top"
+                                />
                             </td>
                             <td>
                                 <input 

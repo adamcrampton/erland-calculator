@@ -16,7 +16,7 @@
         <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@100;200;300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet" />
         <!-- Bootstrap icons-->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" rel="stylesheet" />
-        <!-- Core theme CSS (includes Bootstrap)-->
+        <!-- Core theme CSS -->
         <link href="{{ asset('css/vendor/theme/styles.css') }}" rel="stylesheet" />
         {{-- App CSS --}}
         <link href="{{ asset('css/app.css') }}" rel="stylesheet" />
@@ -72,9 +72,7 @@
                 </div>
             </div>
         </footer>
-        <!-- Bootstrap core JS-->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
         {{-- App JS --}}
-        <script src="{{ asset('js/calculators/erlang/app.js') }}"></script>
+        <script src="{{ asset('js/calculators/erlang/index.js') }}"></script>
     </body>
 </html>
