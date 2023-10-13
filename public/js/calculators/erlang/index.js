@@ -4893,13 +4893,14 @@ var Card = /*#__PURE__*/function (_Component) {
     var _this;
     _classCallCheck(this, Card);
     _this = _super.call(this, props);
-    _this.state = {};
     _this.triggerCalculated = _this.triggerCalculated.bind(_assertThisInitialized(_this));
+    _this.calculations = {};
     return _this;
   }
   _createClass(Card, [{
     key: "render",
     value: function render() {
+      var _this2 = this;
       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
         className: "card accordion-item",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
@@ -4922,15 +4923,21 @@ var Card = /*#__PURE__*/function (_Component) {
               className: "card-text pb-2 border-bottom",
               children: "Set fields to calculate staff numbers required to reach an agreed service level."
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_Table__WEBPACK_IMPORTED_MODULE_1__["default"], {
-              triggerCalculated: this.triggerCalculated
+              triggerCalculated: function triggerCalculated(evt, data) {
+                return _this2.triggerCalculated(evt, data);
+              }
             })]
           })
         })]
       });
     }
   }, {
+    key: "calculate",
+    value: function calculate(data) {}
+  }, {
     key: "triggerCalculated",
-    value: function triggerCalculated() {
+    value: function triggerCalculated(evt, data) {
+      this.calculate(data);
       this.props.showResults();
     }
   }]);
@@ -5171,6 +5178,7 @@ var Table = /*#__PURE__*/function (_Component) {
   _createClass(Table, [{
     key: "render",
     value: function render() {
+      var _this2 = this;
       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("table", {
           className: "table table-calculator",
@@ -5427,8 +5435,10 @@ var Table = /*#__PURE__*/function (_Component) {
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
           className: "text-center",
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
-            className: "btn btn-sm btn-pink",
-            onClick: this.props.triggerCalculated,
+            className: "btn btn-sm btn-u-violet",
+            onClick: function onClick(evt) {
+              return _this2.props.triggerCalculated(evt, _this2.state);
+            },
             "data-bs-toggle": "collapse",
             "data-bs-target": "#collapse-form",
             "aria-expanded": "true",

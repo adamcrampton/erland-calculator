@@ -246,8 +246,8 @@ class Table extends Component {
                 </table>
                 <div className="text-center">
                     <button 
-                        className="btn btn-sm btn-pink" 
-                        onClick={ this.props.triggerCalculated }
+                        className="btn btn-sm btn-u-violet" 
+                        onClick={ (evt) => this.props.triggerCalculated(evt, this.state) }
                         data-bs-toggle="collapse"
                         data-bs-target="#collapse-form" 
                         aria-expanded="true" 

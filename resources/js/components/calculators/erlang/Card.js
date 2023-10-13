@@ -4,11 +4,12 @@ import Table from './Table';
 class Card extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-
-        };
 
         this.triggerCalculated = this.triggerCalculated.bind(this);
+
+        this.calculations = {
+
+        };
     }
     render() {
         return (
@@ -28,13 +29,17 @@ class Card extends Component {
                 <div id="collapse-form" className={ `card-body accordion-collapse collapse ${ this.props.visible && 'show' }`}>
                     <div id="card-form">
                         <p className="card-text pb-2 border-bottom">Set fields to calculate staff numbers required to reach an agreed service level.</p>
-                        <Table triggerCalculated={ this.triggerCalculated } />
+                        <Table triggerCalculated={ (evt, data) => this.triggerCalculated(evt, data) } />
                     </div>
                 </div>
             </div>
         );
     };
-    triggerCalculated() {
+    calculate(data) {
+
+    }
+    triggerCalculated(evt, data) {
+        this.calculate(data);
         this.props.showResults();
     }
 }
