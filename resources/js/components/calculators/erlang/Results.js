@@ -48,6 +48,20 @@ class Results extends Component {
                             <p className="card-text">The number of agents required is <strong></strong>, which includes a shrinkage factor of <strong></strong>.</p>
                             <p className="card-text">Based on the above data, the Service Level Calculated is <strong></strong>, with an Average Speed To Answer of <strong></strong>.</p>
                         </div>
+                        <div className="text-center">
+                            <button 
+                                className="btn btn-sm btn-u-violet me-1" 
+                                onClick={ this.props.toggleForm }
+                            >
+                                Show Calculator
+                            </button>
+                            <button 
+                                className="btn btn-sm btn-r-violet" 
+                                onClick={ this.props.startOver }
+                            >
+                                Start Over
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -18,7 +18,7 @@ class CommonPopover extends Component {
     render() {
         return (
             <OverlayTrigger trigger="click" placement={ this.props.placement } overlay={ this.popover }>
-                <button class="btn"><FontAwesomeIcon icon={ faCircleQuestion } /></button>
+                <button className="btn"><FontAwesomeIcon icon={ faCircleQuestion } /></button>
             </OverlayTrigger>
         );
     }

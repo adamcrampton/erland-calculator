@@ -39,7 +39,7 @@ class Table extends Component {
                                 </label>
                                 <CommonPopover
                                     headingId="newHeading"
-                                    headingClass="h3"  
+                                    headingclassName="h3"  
                                     headingContent="Heading Text"
                                     bodyContent="Some text for the body"
                                     placement="top"
