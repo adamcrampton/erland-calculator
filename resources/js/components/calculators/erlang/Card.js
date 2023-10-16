@@ -36,7 +36,7 @@ class Card extends Component {
         );
     };
     calculate(data) {
-
+        console.log(data)
     }
     triggerCalculated(evt, data) {
         this.calculate(data);
