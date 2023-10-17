@@ -5181,7 +5181,7 @@ var Table = /*#__PURE__*/function (_Component) {
     };
 
     // Unit selections for input dropdowns.
-    _this.units = ['minutes', 'hours', 'weeks', 'months'];
+    _this.units = ['seconds', 'minutes', 'hours', 'weeks', 'months'];
 
     // Submit button toggling.
     _this.disableButton = _this.disableButton.bind(_assertThisInitialized(_this));
@@ -5189,6 +5189,45 @@ var Table = /*#__PURE__*/function (_Component) {
 
     // Custom validators.
     (0,formsy_react__WEBPACK_IMPORTED_MODULE_3__.addValidationRule)('incomingCallsBoundaries', function (values, value) {
+      return value > 0 && value <= 1000;
+    });
+    (0,formsy_react__WEBPACK_IMPORTED_MODULE_3__.addValidationRule)('timePeriodBoundaries', function (values, value) {
+      // To-minutes conversion.
+      var converted = value;
+      switch (_this.selections.timePeriodUnits) {
+        case 'seconds':
+          converted = value / 60;
+        case 'minutes':
+          converted = value;
+          break;
+        case 'hours':
+          converted = value * 60;
+          break;
+        case 'months':
+          converted = value * 60 * 31;
+          break;
+        default:
+          converted = value;
+          break;
+      }
+      return converted > 0 && converted <= 1000;
+    });
+    (0,formsy_react__WEBPACK_IMPORTED_MODULE_3__.addValidationRule)('percentage', function (values, value) {
+      return value >= 0 && value <= 100;
+    });
+    (0,formsy_react__WEBPACK_IMPORTED_MODULE_3__.addValidationRule)('handleTime', function (values, value) {
+      return value > 0 && value <= 1000;
+    });
+    (0,formsy_react__WEBPACK_IMPORTED_MODULE_3__.addValidationRule)('targetAnswerTime', function (values, value) {
+      return value > 0 && value <= 1000;
+    });
+    (0,formsy_react__WEBPACK_IMPORTED_MODULE_3__.addValidationRule)('averagePatience', function (values, value) {
+      return value > 0 && value <= 1000;
+    });
+    (0,formsy_react__WEBPACK_IMPORTED_MODULE_3__.addValidationRule)('weekWorkHours', function (values, value) {
+      return value > 0 && value <= 80;
+    });
+    (0,formsy_react__WEBPACK_IMPORTED_MODULE_3__.addValidationRule)('reportInterval', function (values, value) {
       return value > 0 && value <= 1000;
     });
 
@@ -5539,15 +5578,15 @@ var Table = /*#__PURE__*/function (_Component) {
     value: function convertTimePeriod(evt) {
       var value = evt.target.value;
       switch (this.state.selections.timePeriodUnits) {
-        case seconds:
+        case 'seconds':
           return value / 60;
-        case minutes:
+        case 'minutes':
           return value;
           break;
-        case hours:
+        case 'hours':
           return value * 60;
           break;
-        case months:
+        case 'months':
           return value * 60 * 31;
           break;
         default:
@@ -5680,7 +5719,7 @@ var FormInput = /*#__PURE__*/function (_Component) {
           value: this.props.value,
           validations: this.props.validations
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
-          "class": "badge bg-danger mt-2",
+          className: "badge bg-danger mt-2",
           children: errorMessage
         })]
       });

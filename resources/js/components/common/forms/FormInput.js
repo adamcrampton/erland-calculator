@@ -27,7 +27,7 @@ class FormInput extends Component {
                 value={ this.props.value } 
                 validations={ this.props.validations }
             />
-            <span class="badge bg-danger mt-2">{ errorMessage }</span>
+            <span className="badge bg-danger mt-2">{ errorMessage }</span>
           </div>
         );
     }

@@ -27,7 +27,7 @@ class Table extends Component {
 
         // Unit selections for input dropdowns.
         this.units = [
-            'minutes', 'hours', 'weeks', 'months'
+            'seconds', 'minutes', 'hours', 'weeks', 'months'
         ];
 
         // Submit button toggling.
@@ -36,6 +36,33 @@ class Table extends Component {
 
         // Custom validators.
         addValidationRule('incomingCallsBoundaries', (values, value) => value > 0 && value <= 1000);
+        addValidationRule('timePeriodBoundaries', (values, value) => {
+            // To-minutes conversion.
+            let converted = value;
+            switch (this.selections.timePeriodUnits) {
+                case 'seconds':
+                    converted = value / 60;
+                case 'minutes':
+                    converted = value;
+                break;
+                case 'hours':
+                    converted = value * 60;
+                break;
+                case 'months':
+                    converted = value * 60 * 31;
+                break;
+                default:
+                    converted = value;
+                break;
+            }
+            return converted > 0 && converted <= 1000
+        });
+        addValidationRule('percentage', (values, value) => value >= 0 && value <= 100);
+        addValidationRule('handleTime', (values, value) => value > 0 && value <= 1000);
+        addValidationRule('targetAnswerTime', (values, value) => value > 0 && value <= 1000);
+        addValidationRule('averagePatience', (values, value) => value > 0 && value <= 1000);
+        addValidationRule('weekWorkHours', (values, value) => value > 0 && value <= 80);
+        addValidationRule('reportInterval', (values, value) => value > 0 && value <= 1000);
 
         // State change handlers.
         this.handleFieldChange = this.handleFieldChange.bind(this);
@@ -360,15 +387,15 @@ class Table extends Component {
         const value = evt.target.value;
 
         switch (this.state.selections.timePeriodUnits) {
-            case seconds:
+            case 'seconds':
                 return value / 60;
-            case minutes:
+            case 'minutes':
                 return value;
             break;
-            case hours:
+            case 'hours':
                 return value * 60;
             break;
-            case months:
+            case 'months':
                 return value * 60 * 31;
             break;
             default:
