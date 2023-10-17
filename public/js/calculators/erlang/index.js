@@ -5161,25 +5161,38 @@ var Table = /*#__PURE__*/function (_Component) {
     var _this;
     _classCallCheck(this, Table);
     _this = _super.call(this, props);
+    // Contains defaults for each field.
     _this.state = {
+      canSubmit: false,
       calculateAllowed: 0,
       averagePatience: 0,
       handleTime: 0,
       maxOccupancy: 0,
-      incomingContacts: 0,
+      incomingCalls: 100,
       reportInterval: 0,
-      serviceLevel: 0,
+      serviceLevel: 90,
       shrinkage: 0,
-      targetAnswerTime: 0,
-      timePeriod: 0,
+      targetAnswerTime: 30,
+      timePeriod: 60,
       selections: {
-        timePeriodUnits: 'minutes'
+        timePeriodUnits: 'seconds'
       },
       weekWorkHours: 40
     };
+
+    // Unit selections for input dropdowns.
     _this.units = ['minutes', 'hours', 'weeks', 'months'];
+
+    // Submit button toggling.
     _this.disableButton = _this.disableButton.bind(_assertThisInitialized(_this));
     _this.enableButton = _this.enableButton.bind(_assertThisInitialized(_this));
+
+    // Custom validators.
+    (0,formsy_react__WEBPACK_IMPORTED_MODULE_3__.addValidationRule)('incomingCallsBoundaries', function (values, value) {
+      return value > 0 && value <= 1000;
+    });
+
+    // State change handlers.
     _this.handleFieldChange = _this.handleFieldChange.bind(_assertThisInitialized(_this));
     _this.handleTimePeriodUnitChange = _this.handleTimePeriodUnitChange.bind(_assertThisInitialized(_this));
     return _this;
@@ -5214,9 +5227,12 @@ var Table = /*#__PURE__*/function (_Component) {
                   children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_common_forms_FormInput__WEBPACK_IMPORTED_MODULE_2__["default"], {
                     className: "form-control form-control-sm",
                     type: "number",
-                    name: "incomingContacts",
-                    value: this.state.incomingContacts,
-                    validations: "isExisty,isNumeric,isInt,minLength:0,maxLength:100"
+                    name: "incomingCalls",
+                    value: this.state.incomingCalls,
+                    handleFieldChange: this.handleFieldChange,
+                    validations: "isExisty,isNumeric,isInt,incomingCallsBoundaries",
+                    validationError: "Value must be between 1 and 1000",
+                    required: true
                   })
                 })]
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("tr", {
@@ -5640,12 +5656,13 @@ var FormInput = /*#__PURE__*/function (_Component) {
     _classCallCheck(this, FormInput);
     _this = _super.call(this, props);
     _this.changeValue = _this.changeValue.bind(_assertThisInitialized(_this));
-    console.log(props);
     return _this;
   }
   _createClass(FormInput, [{
     key: "changeValue",
     value: function changeValue(event) {
+      // Updates value in parent component.
+      this.props.handleFieldChange(event);
       // Note: setValue() is used by Formsy as part of the validation process.
       this.props.setValue(event.currentTarget.value);
     }
@@ -5661,9 +5678,9 @@ var FormInput = /*#__PURE__*/function (_Component) {
           type: (_this$props$type = this.props.type) !== null && _this$props$type !== void 0 ? _this$props$type : 'text',
           name: this.props.name,
           value: this.props.value,
-          validations: this.props.validations,
-          required: true
+          validations: this.props.validations
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
+          "class": "badge bg-danger mt-2",
           children: errorMessage
         })]
       });

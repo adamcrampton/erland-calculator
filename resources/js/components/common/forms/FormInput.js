@@ -5,11 +5,11 @@ class FormInput extends Component {
     constructor(props) {
         super(props);
         this.changeValue = this.changeValue.bind(this);
-
-        console.log(props)
     }
 
     changeValue(event) {
+        // Updates value in parent component.
+        this.props.handleFieldChange(event);
         // Note: setValue() is used by Formsy as part of the validation process.
         this.props.setValue(event.currentTarget.value);
       }
@@ -26,9 +26,8 @@ class FormInput extends Component {
                 name={ this.props.name }
                 value={ this.props.value } 
                 validations={ this.props.validations }
-                required
             />
-            <span>{ errorMessage }</span>
+            <span class="badge bg-danger mt-2">{ errorMessage }</span>
           </div>
         );
     }

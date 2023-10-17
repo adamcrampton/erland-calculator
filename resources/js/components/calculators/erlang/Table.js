@@ -1,35 +1,43 @@
 import React, { Component } from 'react';
 import CommonPopover from '../../common/ui/CommonPopover';
 import FormInput from '../../common/forms/FormInput';
-import Formsy from 'formsy-react';
+import Formsy, { addValidationRule } from 'formsy-react';
 
 class Table extends Component {
     constructor(props) {
         super(props);
+        // Contains defaults for each field.
         this.state = {
+            canSubmit: false,
             calculateAllowed: 0,
             averagePatience: 0,
             handleTime: 0,
             maxOccupancy: 0,
-            incomingContacts: 0,
+            incomingCalls: 100,
             reportInterval: 0,
-            serviceLevel: 0,
+            serviceLevel: 90,
             shrinkage: 0,
-            targetAnswerTime: 0,
-            timePeriod: 0,
+            targetAnswerTime: 30,
+            timePeriod: 60,
             selections: {
-                timePeriodUnits: 'minutes'
+                timePeriodUnits: 'seconds'
             },
             weekWorkHours: 40
         };
 
+        // Unit selections for input dropdowns.
         this.units = [
             'minutes', 'hours', 'weeks', 'months'
         ];
 
+        // Submit button toggling.
         this.disableButton = this.disableButton.bind(this);
         this.enableButton = this.enableButton.bind(this);
 
+        // Custom validators.
+        addValidationRule('incomingCallsBoundaries', (values, value) => value > 0 && value <= 1000);
+
+        // State change handlers.
         this.handleFieldChange = this.handleFieldChange.bind(this);
         this.handleTimePeriodUnitChange = this.handleTimePeriodUnitChange.bind(this);
     }
@@ -60,18 +68,21 @@ class Table extends Component {
                                 <FormInput 
                                     className="form-control form-control-sm"
                                     type="number"
-                                    name="incomingContacts"
-                                    value={ this.state.incomingContacts }
-                                    validations="isExisty,isNumeric,isInt,minLength:0,maxLength:100"
+                                    name="incomingCalls"
+                                    value={ this.state.incomingCalls }
+                                    handleFieldChange={ this.handleFieldChange }
+                                    validations="isExisty,isNumeric,isInt,incomingCallsBoundaries"
+                                    validationError="Value must be between 1 and 1000"
+                                    required
                                 />
                                 
                                 {/* <input 
                                     className="form-control form-control-sm"
-                                    name="incomingContacts"
+                                    name="incomingCalls"
                                     type="number"
                                     min="0"
                                     onChange={ this.handleFieldChange }
-                                    value={ this.state.incomingContacts }
+                                    value={ this.state.incomingCalls }
                                 /> */}
                             </td>
                         </tr>
