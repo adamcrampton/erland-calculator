@@ -376,28 +376,6 @@ class Table extends Component {
             </div>
         );
     }
-
-    // // Convert value to selected units + update state.
-    // convertTimePeriod(evt) {
-    //     const value = evt.target.value;
-
-    //     switch (this.state.selections.timePeriodUnits) {
-    //         case 'seconds':
-    //             return value / 60;
-    //         case 'minutes':
-    //             return value;
-    //         break;
-    //         case 'hours':
-    //             return value * 60;
-    //         break;
-    //         case 'months':
-    //             return value * 60 * 31;
-    //         break;
-    //         default:
-    //             return value;
-    //         break;
-    //     }
-    // }
     disableButton() {
         this.setState({ canSubmit: false });
     }

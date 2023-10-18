@@ -4794,12 +4794,18 @@ var App = /*#__PURE__*/function (_Component) {
     _this = _super.call(this, props);
     _this.state = {
       cardVisible: true,
+      dataSet: {},
       resultsVisible: false,
       results: {
         agents: 0,
-        serviceLevel: 0,
+        calls: 0,
         occupancy: 0,
-        calls: 0
+        serviceLevel: 0,
+        shrinkage: 0,
+        speedToAnswer: 0
+      },
+      selections: {
+        timePeriodUnits: 'minutes'
       }
     };
     _this.calculate = _this.calculate.bind(_assertThisInitialized(_this));
@@ -4814,17 +4820,19 @@ var App = /*#__PURE__*/function (_Component) {
       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
         className: "accordion w-100",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_Card__WEBPACK_IMPORTED_MODULE_1__["default"], {
-          visible: this.state.cardVisible,
+          calculate: this.calculate,
           showResults: this.showResults,
-          toggleForm: this.toggleForm,
           startOver: this.startOver,
-          calculate: this.calculate
+          toggleForm: this.toggleForm,
+          visible: this.state.cardVisible
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_Results__WEBPACK_IMPORTED_MODULE_2__["default"], {
-          visible: this.state.resultsVisible,
+          dataSet: this.state.dataSet,
+          results: this.state.results,
           showResults: this.showResults,
-          toggleForm: this.toggleForm,
           startOver: this.startOver,
-          results: this.state.results
+          toggleForm: this.toggleForm,
+          selections: this.state.selections,
+          visible: this.state.resultsVisible
         })]
       });
     }
@@ -4834,7 +4842,10 @@ var App = /*#__PURE__*/function (_Component) {
       // Make a copy and convert Time Period field.
       var dataSet = data;
       dataSet.timePeriod = this.convertToMinutes(data.timePeriod, 'minutes');
-      console.log(dataSet);
+      this.setState({
+        dataSet: dataSet,
+        selections: dataSet.selections
+      });
     }
   }, {
     key: "convertToMinutes",
@@ -5113,15 +5124,27 @@ var Results = /*#__PURE__*/function (_Component) {
               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h4", {
                 className: "mt-3",
                 children: "Summary"
-              }), "These calculations are based on ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("strong", {}), " incoming calls over a period of ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("strong", {}), " minutes.", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h4", {
+              }), "These calculations are based on ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("strong", {
+                children: this.props.dataSet.incomingCalls
+              }), " incoming calls over a period of ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("strong", {
+                children: [this.props.dataSet.timePeriod, " ", this.props.selections.timePeriodUnits]
+              }), ".", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h4", {
                 className: "mt-3",
                 children: "Your Results"
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("p", {
                 className: "card-text",
-                children: ["The number of agents required is ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("strong", {}), ", which includes a shrinkage factor of ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("strong", {}), "."]
+                children: ["The number of agents required is ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("strong", {
+                  children: this.props.results.agents
+                }), ", which includes a shrinkage factor of ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("strong", {
+                  children: this.props.results.shrinkage
+                }), "."]
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("p", {
                 className: "card-text",
-                children: ["Based on the above data, the Service Level Calculated is ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("strong", {}), ", with an Average Speed To Answer of ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("strong", {}), "."]
+                children: ["Based on the above data, the Service Level Calculated is ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("strong", {
+                  children: this.props.results.serviceLevel
+                }), ", with an Average Speed To Answer of ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("strong", {
+                  children: this.props.results.speedToAnswer
+                }), "."]
               })]
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
               className: "text-center",
@@ -5581,28 +5604,6 @@ var Table = /*#__PURE__*/function (_Component) {
         })
       });
     }
-
-    // // Convert value to selected units + update state.
-    // convertTimePeriod(evt) {
-    //     const value = evt.target.value;
-
-    //     switch (this.state.selections.timePeriodUnits) {
-    //         case 'seconds':
-    //             return value / 60;
-    //         case 'minutes':
-    //             return value;
-    //         break;
-    //         case 'hours':
-    //             return value * 60;
-    //         break;
-    //         case 'months':
-    //             return value * 60 * 31;
-    //         break;
-    //         default:
-    //             return value;
-    //         break;
-    //     }
-    // }
   }, {
     key: "disableButton",
     value: function disableButton() {

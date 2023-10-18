@@ -9,12 +9,18 @@ class App extends Component {
 
         this.state = {
             cardVisible: true,
+            dataSet: {},
             resultsVisible: false,
             results: {
                 agents: 0,
-                serviceLevel: 0,
+                calls: 0,
                 occupancy: 0,
-                calls: 0
+                serviceLevel: 0,
+                shrinkage: 0,
+                speedToAnswer: 0
+            },
+            selections: {
+                timePeriodUnits: 'minutes'
             }
         };
 
@@ -27,18 +33,20 @@ class App extends Component {
         return (
             <div className="accordion w-100">
                 <Card 
-                    visible={ this.state.cardVisible } 
-                    showResults={ this.showResults }
-                    toggleForm={ this.toggleForm }
-                    startOver={ this.startOver }
                     calculate={ this.calculate }
-                />
-                <Results 
-                    visible={ this.state.resultsVisible } 
                     showResults={ this.showResults }
-                    toggleForm={ this.toggleForm }
                     startOver={ this.startOver }
+                    toggleForm={ this.toggleForm }
+                    visible={ this.state.cardVisible } 
+                />
+                <Results
+                    dataSet={ this.state.dataSet }
                     results={ this.state.results }
+                    showResults={ this.showResults }
+                    startOver={ this.startOver }
+                    toggleForm={ this.toggleForm }
+                    selections={ this.state.selections }
+                    visible={ this.state.resultsVisible }
                 />
             </div>
         );
@@ -48,7 +56,10 @@ class App extends Component {
         const dataSet = data;
         dataSet.timePeriod = this.convertToMinutes(data.timePeriod, 'minutes');
 
-        console.log(dataSet);
+        this.setState({
+            dataSet: dataSet,
+            selections: dataSet.selections
+        });
     }
     convertToMinutes(value, unit) {
         switch (unit) {
