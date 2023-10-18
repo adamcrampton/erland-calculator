@@ -61,13 +61,15 @@ class App extends Component {
         const intensity = (data.incomingCalls / (data.reportInterval * 60)) * data.handleTime;
         const agents = parseInt(intensity);
 
-        console.log(intensity)
-
         // Set values for linked components.
         this.setState({
             dataSet: dataSet,
             selections: dataSet.selections,
-
+            results: {
+                ...this.state.results,
+                agents: agents,
+                intensity: intensity,
+            }
         });
     }
     convertToMinutes(value, unit) {
