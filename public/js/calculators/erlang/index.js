@@ -4794,7 +4794,13 @@ var App = /*#__PURE__*/function (_Component) {
     _this = _super.call(this, props);
     _this.state = {
       cardVisible: true,
-      resultsVisible: false
+      resultsVisible: false,
+      results: {
+        agents: 0,
+        serviceLevel: 0,
+        occupancy: 0,
+        calls: 0
+      }
     };
     _this.calculate = _this.calculate.bind(_assertThisInitialized(_this));
     _this.startOver = _this.startOver.bind(_assertThisInitialized(_this));
@@ -4817,7 +4823,8 @@ var App = /*#__PURE__*/function (_Component) {
           visible: this.state.resultsVisible,
           showResults: this.showResults,
           toggleForm: this.toggleForm,
-          startOver: this.startOver
+          startOver: this.startOver,
+          results: this.state.results
         })]
       });
     }
@@ -5051,7 +5058,7 @@ var Results = /*#__PURE__*/function (_Component) {
                   }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
                     className: "d-block fs-3 mt-2",
                     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("strong", {
-                      children: "0"
+                      children: this.props.results.agents
                     })
                   })]
                 }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
@@ -5066,7 +5073,7 @@ var Results = /*#__PURE__*/function (_Component) {
                   }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("span", {
                     className: "d-block fs-3 mt-2",
                     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("strong", {
-                      children: "0"
+                      children: this.props.results.serviceLevel
                     }), "%"]
                   })]
                 }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
@@ -5081,7 +5088,7 @@ var Results = /*#__PURE__*/function (_Component) {
                   }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("span", {
                     className: "d-block fs-3 mt-2",
                     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("strong", {
-                      children: "0"
+                      children: this.props.results.occupancy
                     }), "%"]
                   })]
                 }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
@@ -5096,7 +5103,7 @@ var Results = /*#__PURE__*/function (_Component) {
                   }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
                     className: "d-block fs-3 mt-2",
                     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("strong", {
-                      children: "0"
+                      children: this.props.results.calls
                     })
                   })]
                 })]

@@ -5,7 +5,6 @@ import { faChartPie, faHeadset, faPhone, faStopwatch } from '@fortawesome/free-s
 class Results extends Component {
     constructor(props) {
         super(props);
-
     }
     render() {
         return (
@@ -22,22 +21,22 @@ class Results extends Component {
                                 <div className="col">
                                     <span className="d-block fs-6 mb-2">Agents</span>
                                     <FontAwesomeIcon icon={ faHeadset } size="4x" className="blue" />
-                                    <span className="d-block fs-3 mt-2"><strong>0</strong></span>
+                                    <span className="d-block fs-3 mt-2"><strong>{ this.props.results.agents }</strong></span>
                                 </div>
                                 <div className="col">
                                     <span className="d-block fs-6 mb-2">Service Level</span>
                                     <FontAwesomeIcon icon={ faStopwatch } size="4x" className="pink" />
-                                    <span className="d-block fs-3 mt-2"><strong>0</strong>%</span>
+                                    <span className="d-block fs-3 mt-2"><strong>{ this.props.results.serviceLevel }</strong>%</span>
                                 </div>
                                 <div className="col">
                                     <span className="d-block fs-6 mb-2">Occupancy</span>
                                     <FontAwesomeIcon icon={ faChartPie } size="4x" className="u-violet" />
-                                    <span className="d-block fs-3 mt-2"><strong>0</strong>%</span>
+                                    <span className="d-block fs-3 mt-2"><strong>{ this.props.results.occupancy }</strong>%</span>
                                 </div>
                                 <div className="col">
                                     <span className="d-block fs-6 mb-2">Calls</span>
                                     <FontAwesomeIcon icon={ faPhone } size="4x" className="r-violet" />
-                                    <span className="d-block fs-3 mt-2"><strong>0</strong></span>
+                                    <span className="d-block fs-3 mt-2"><strong>{ this.props.results.calls }</strong></span>
                                 </div>
                             </div>
                         </div>

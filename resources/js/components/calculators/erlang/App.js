@@ -9,7 +9,13 @@ class App extends Component {
 
         this.state = {
             cardVisible: true,
-            resultsVisible: false
+            resultsVisible: false,
+            results: {
+                agents: 0,
+                serviceLevel: 0,
+                occupancy: 0,
+                calls: 0
+            }
         };
 
         this.calculate = this.calculate.bind(this);
@@ -32,6 +38,7 @@ class App extends Component {
                     showResults={ this.showResults }
                     toggleForm={ this.toggleForm }
                     startOver={ this.startOver }
+                    results={ this.state.results }
                 />
             </div>
         );
