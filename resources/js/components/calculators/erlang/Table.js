@@ -24,7 +24,17 @@ class Table extends Component {
             selections: {
                 timePeriodUnits: 'minutes'
             },
-            weekWorkHours: 40
+            weekWorkHours: 40,
+            validationErrors: {
+                handleTimeBoundaries: 'Value must be between 1 and 30000',
+                incomingCallsBoundaries: 'Value must be between 1 and 30000',
+                timePeriodBoundaries: 'Value must be between 1 and 1000',
+                percentageBoundaries: 'Value must be between 1 and 100',
+                targetAnswerTimeBoundaries: 'Value must be between 1 and 30000',
+                averagePatienceBoundaries: 'Value must be between 1 and 1000',
+                weekWorkHoursBoundaries: 'Value must be between 1 and 80',
+                reportIntervalBoundaries: 'Value must be between 5 and 1500'
+            }
         };
 
         // Unit selections for input dropdowns.
@@ -36,35 +46,8 @@ class Table extends Component {
         this.disableButton = this.disableButton.bind(this);
         this.enableButton = this.enableButton.bind(this);
 
-        // Custom validators.
-        addValidationRule('incomingCallsBoundaries', (values, value) => value > 0 && value <= 1000);
-        addValidationRule('timePeriodBoundaries', (values, value) => {
-            // To-minutes conversion.
-            let converted = value;
-            switch (this.state.selections.timePeriodUnits) {
-                case 'seconds':
-                    converted = value / 60;
-                case 'minutes':
-                    converted = value;
-                break;
-                case 'hours':
-                    converted = value * 60;
-                break;
-                case 'months':
-                    converted = value * 60 * 31;
-                break;
-                default:
-                    converted = value;
-                break;
-            }
-            return converted > 0 && converted <= 1000
-        });
-        addValidationRule('percentageBoundaries', (values, value) => value >= 0 && value <= 100);
-        addValidationRule('handleTimeBoundaries', (values, value) => value > 0 && value <= 1000);
-        addValidationRule('targetAnswerTimeBoundaries', (values, value) => value > 0 && value <= 1000);
-        addValidationRule('averagePatienceBoundaries', (values, value) => value > 0 && value <= 1000);
-        addValidationRule('weekWorkHoursBoundaries', (values, value) => value > 0 && value <= 80);
-        addValidationRule('reportIntervalBoundaries', (values, value) => value > 0 && value <= 1000);
+        // Custom validations.
+        this.setupValidators();
 
         // State change handlers.
         this.handleFieldChange = this.handleFieldChange.bind(this);
@@ -101,7 +84,7 @@ class Table extends Component {
                                     value={ this.state.incomingCalls }
                                     handleFieldChange={ this.handleFieldChange }
                                     validations="isExisty,isNumeric,isInt,incomingCallsBoundaries"
-                                    validationError="Value must be between 1 and 1000"
+                                    validationError={ this.state.validationErrors.incomingCallsBoundaries }
                                     required
                                 />
                             </td>
@@ -128,8 +111,7 @@ class Table extends Component {
                                         value={ this.state.timePeriod }
                                         handleFieldChange={ this.handleFieldChange }
                                         validations="isExisty,isNumeric,isInt,timePeriodBoundaries"
-                                        validationError="Value must be between 1 and 1000"
-                                        required
+                                        validationError={ this.state.validationErrors.timePeriodBoundaries }
                                     />
                                     <TimeUnitSelect
                                         selected={ this.state.selections.timePeriodUnits }
@@ -162,7 +144,7 @@ class Table extends Component {
                                         label="Seconds"
                                         handleFieldChange={ this.handleFieldChange }
                                         validations="isExisty,isNumeric,isInt,handleTimeBoundaries"
-                                        validationError="Value must be between 1 and 1000"
+                                        validationError={ this.state.validationErrors.handleTimeBoundaries }
                                         required
                                     />
                                 </div>
@@ -190,7 +172,7 @@ class Table extends Component {
                                     label="%"
                                     handleFieldChange={ this.handleFieldChange }
                                     validations="isExisty,isNumeric,isInt,percentageBoundaries"
-                                    validationError="Value must be between 1 and 100"
+                                    validationError={ this.state.validationErrors.percentageBoundaries }
                                     required
                                 />
                             </td>
@@ -217,7 +199,7 @@ class Table extends Component {
                                     label="Seconds"
                                     handleFieldChange={ this.handleFieldChange }
                                     validations="isExisty,isNumeric,isInt,targetAnswerTimeBoundaries"
-                                    validationError="Value must be between 1 and 1000"
+                                    validationError={ this.state.validationErrors.targetAnswerTimeBoundaries }
                                     required
                                 />
                             </td>
@@ -244,7 +226,7 @@ class Table extends Component {
                                     label="%"
                                     handleFieldChange={ this.handleFieldChange }
                                     validations="isExisty,isNumeric,isInt,percentageBoundaries"
-                                    validationError="Value must be between 1 and 100"
+                                    validationError={ this.state.validationErrors.percentageBoundaries }
                                     required
                                 />
                             </td>
@@ -271,7 +253,7 @@ class Table extends Component {
                                     label="%"
                                     handleFieldChange={ this.handleFieldChange }
                                     validations="isExisty,isNumeric,isInt,percentageBoundaries"
-                                    validationError="Value must be between 1 and 100"
+                                    validationError={ this.state.validationErrors.percentageBoundaries }
                                     required
                                 />
                             </td>
@@ -298,7 +280,7 @@ class Table extends Component {
                                     label="Seconds"
                                     handleFieldChange={ this.handleFieldChange }
                                     validations="isExisty,isNumeric,isInt,averagePatienceBoundaries"
-                                    validationError="Value must be between 1 and 1000"
+                                    validationError={ this.state.validationErrors.averagePatienceBoundaries }
                                     required
                                 />
                             </td>
@@ -325,7 +307,7 @@ class Table extends Component {
                                     label="%"
                                     handleFieldChange={ this.handleFieldChange }
                                     validations="isExisty,isNumeric,isInt,percentageBoundaries"
-                                    validationError="Value must be between 1 and 100"
+                                    validationError={ this.state.validationErrors.weekWorkHoursBoundaries }
                                     required
                                 />
                             </td>
@@ -352,7 +334,7 @@ class Table extends Component {
                                     label="Minutes"
                                     handleFieldChange={ this.handleFieldChange }
                                     validations="isExisty,isNumeric,isInt,reportIntervalBoundaries"
-                                    validationError="Value must be between 1 and 1000"
+                                    validationError={ this.state.validationErrors.reportIntervalBoundaries }
                                     required
                                 />
                             </td>
@@ -395,6 +377,37 @@ class Table extends Component {
                 timePeriodUnits: evt.target.value
             }
         });
+    }
+    setupValidators() {
+        // Custom validators.
+        addValidationRule('incomingCallsBoundaries', (values, value) => value > 0 && value <= 30000);
+        addValidationRule('timePeriodBoundaries', (values, value) => {
+            // To-minutes conversion.
+            let converted = value;
+            switch (this.state.selections.timePeriodUnits) {
+                case 'seconds':
+                    converted = value / 60;
+                case 'minutes':
+                    converted = value;
+                break;
+                case 'hours':
+                    converted = value * 60;
+                break;
+                case 'months':
+                    converted = value * 60 * 31;
+                break;
+                default:
+                    converted = value;
+                break;
+            }
+            return converted > 0 && converted <= 1000
+        });
+        addValidationRule('percentageBoundaries', (values, value) => value >= 0 && value <= 100);
+        addValidationRule('handleTimeBoundaries', (values, value) => value > 0 && value <= 30000);
+        addValidationRule('targetAnswerTimeBoundaries', (values, value) => value > 0 && value <= 30000);
+        addValidationRule('averagePatienceBoundaries', (values, value) => value > 0 && value <= 1000);
+        addValidationRule('weekWorkHoursBoundaries', (values, value) => value > 0 && value <= 80);
+        addValidationRule('reportIntervalBoundaries', (values, value) => value >= 5 && value <= 1500);
     }
 }
 

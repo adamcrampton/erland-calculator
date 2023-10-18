@@ -14,6 +14,7 @@ class App extends Component {
             results: {
                 agents: 0,
                 calls: 0,
+                intensity: 0,
                 occupancy: 0,
                 serviceLevel: 0,
                 shrinkage: 0,
@@ -56,9 +57,17 @@ class App extends Component {
         const dataSet = data;
         dataSet.timePeriod = this.convertToMinutes(data.timePeriod, 'minutes');
 
+        // Process calculations.
+        const intensity = (data.incomingCalls / (data.reportInterval * 60)) * data.handleTime;
+        const agents = parseInt(intensity);
+
+        console.log(intensity)
+
+        // Set values for linked components.
         this.setState({
             dataSet: dataSet,
-            selections: dataSet.selections
+            selections: dataSet.selections,
+
         });
     }
     convertToMinutes(value, unit) {

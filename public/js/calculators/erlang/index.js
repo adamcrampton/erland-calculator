@@ -4799,6 +4799,7 @@ var App = /*#__PURE__*/function (_Component) {
       results: {
         agents: 0,
         calls: 0,
+        intensity: 0,
         occupancy: 0,
         serviceLevel: 0,
         shrinkage: 0,
@@ -4842,6 +4843,13 @@ var App = /*#__PURE__*/function (_Component) {
       // Make a copy and convert Time Period field.
       var dataSet = data;
       dataSet.timePeriod = this.convertToMinutes(data.timePeriod, 'minutes');
+
+      // Process calculations.
+      var intensity = data.incomingCalls / (data.reportInterval * 60) * data.handleTime;
+      var agents = parseInt(intensity);
+      console.log(intensity);
+
+      // Set values for linked components.
       this.setState({
         dataSet: dataSet,
         selections: dataSet.selections
@@ -5235,7 +5243,17 @@ var Table = /*#__PURE__*/function (_Component) {
       selections: {
         timePeriodUnits: 'minutes'
       },
-      weekWorkHours: 40
+      weekWorkHours: 40,
+      validationErrors: {
+        handleTimeBoundaries: 'Value must be between 1 and 30000',
+        incomingCallsBoundaries: 'Value must be between 1 and 30000',
+        timePeriodBoundaries: 'Value must be between 1 and 1000',
+        percentageBoundaries: 'Value must be between 1 and 100',
+        targetAnswerTimeBoundaries: 'Value must be between 1 and 30000',
+        averagePatienceBoundaries: 'Value must be between 1 and 1000',
+        weekWorkHoursBoundaries: 'Value must be between 1 and 80',
+        reportIntervalBoundaries: 'Value must be between 5 and 1500'
+      }
     };
 
     // Unit selections for input dropdowns.
@@ -5245,49 +5263,8 @@ var Table = /*#__PURE__*/function (_Component) {
     _this.disableButton = _this.disableButton.bind(_assertThisInitialized(_this));
     _this.enableButton = _this.enableButton.bind(_assertThisInitialized(_this));
 
-    // Custom validators.
-    (0,formsy_react__WEBPACK_IMPORTED_MODULE_3__.addValidationRule)('incomingCallsBoundaries', function (values, value) {
-      return value > 0 && value <= 1000;
-    });
-    (0,formsy_react__WEBPACK_IMPORTED_MODULE_3__.addValidationRule)('timePeriodBoundaries', function (values, value) {
-      // To-minutes conversion.
-      var converted = value;
-      switch (_this.state.selections.timePeriodUnits) {
-        case 'seconds':
-          converted = value / 60;
-        case 'minutes':
-          converted = value;
-          break;
-        case 'hours':
-          converted = value * 60;
-          break;
-        case 'months':
-          converted = value * 60 * 31;
-          break;
-        default:
-          converted = value;
-          break;
-      }
-      return converted > 0 && converted <= 1000;
-    });
-    (0,formsy_react__WEBPACK_IMPORTED_MODULE_3__.addValidationRule)('percentageBoundaries', function (values, value) {
-      return value >= 0 && value <= 100;
-    });
-    (0,formsy_react__WEBPACK_IMPORTED_MODULE_3__.addValidationRule)('handleTimeBoundaries', function (values, value) {
-      return value > 0 && value <= 1000;
-    });
-    (0,formsy_react__WEBPACK_IMPORTED_MODULE_3__.addValidationRule)('targetAnswerTimeBoundaries', function (values, value) {
-      return value > 0 && value <= 1000;
-    });
-    (0,formsy_react__WEBPACK_IMPORTED_MODULE_3__.addValidationRule)('averagePatienceBoundaries', function (values, value) {
-      return value > 0 && value <= 1000;
-    });
-    (0,formsy_react__WEBPACK_IMPORTED_MODULE_3__.addValidationRule)('weekWorkHoursBoundaries', function (values, value) {
-      return value > 0 && value <= 80;
-    });
-    (0,formsy_react__WEBPACK_IMPORTED_MODULE_3__.addValidationRule)('reportIntervalBoundaries', function (values, value) {
-      return value > 0 && value <= 1000;
-    });
+    // Custom validations.
+    _this.setupValidators();
 
     // State change handlers.
     _this.handleFieldChange = _this.handleFieldChange.bind(_assertThisInitialized(_this));
@@ -5328,7 +5305,7 @@ var Table = /*#__PURE__*/function (_Component) {
                     value: this.state.incomingCalls,
                     handleFieldChange: this.handleFieldChange,
                     validations: "isExisty,isNumeric,isInt,incomingCallsBoundaries",
-                    validationError: "Value must be between 1 and 1000",
+                    validationError: this.state.validationErrors.incomingCallsBoundaries,
                     required: true
                   })
                 })]
@@ -5356,8 +5333,7 @@ var Table = /*#__PURE__*/function (_Component) {
                       value: this.state.timePeriod,
                       handleFieldChange: this.handleFieldChange,
                       validations: "isExisty,isNumeric,isInt,timePeriodBoundaries",
-                      validationError: "Value must be between 1 and 1000",
-                      required: true
+                      validationError: this.state.validationErrors.timePeriodBoundaries
                     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_common_forms_TimeUnitSelect__WEBPACK_IMPORTED_MODULE_4__["default"], {
                       selected: this.state.selections.timePeriodUnits,
                       handleTimePeriodUnitChange: this.handleTimePeriodUnitChange,
@@ -5390,7 +5366,7 @@ var Table = /*#__PURE__*/function (_Component) {
                       label: "Seconds",
                       handleFieldChange: this.handleFieldChange,
                       validations: "isExisty,isNumeric,isInt,handleTimeBoundaries",
-                      validationError: "Value must be between 1 and 1000",
+                      validationError: this.state.validationErrors.handleTimeBoundaries,
                       required: true
                     })
                   })
@@ -5418,7 +5394,7 @@ var Table = /*#__PURE__*/function (_Component) {
                     label: "%",
                     handleFieldChange: this.handleFieldChange,
                     validations: "isExisty,isNumeric,isInt,percentageBoundaries",
-                    validationError: "Value must be between 1 and 100",
+                    validationError: this.state.validationErrors.percentageBoundaries,
                     required: true
                   })
                 })]
@@ -5445,7 +5421,7 @@ var Table = /*#__PURE__*/function (_Component) {
                     label: "Seconds",
                     handleFieldChange: this.handleFieldChange,
                     validations: "isExisty,isNumeric,isInt,targetAnswerTimeBoundaries",
-                    validationError: "Value must be between 1 and 1000",
+                    validationError: this.state.validationErrors.targetAnswerTimeBoundaries,
                     required: true
                   })
                 })]
@@ -5472,7 +5448,7 @@ var Table = /*#__PURE__*/function (_Component) {
                     label: "%",
                     handleFieldChange: this.handleFieldChange,
                     validations: "isExisty,isNumeric,isInt,percentageBoundaries",
-                    validationError: "Value must be between 1 and 100",
+                    validationError: this.state.validationErrors.percentageBoundaries,
                     required: true
                   })
                 })]
@@ -5499,7 +5475,7 @@ var Table = /*#__PURE__*/function (_Component) {
                     label: "%",
                     handleFieldChange: this.handleFieldChange,
                     validations: "isExisty,isNumeric,isInt,percentageBoundaries",
-                    validationError: "Value must be between 1 and 100",
+                    validationError: this.state.validationErrors.percentageBoundaries,
                     required: true
                   })
                 })]
@@ -5526,7 +5502,7 @@ var Table = /*#__PURE__*/function (_Component) {
                     label: "Seconds",
                     handleFieldChange: this.handleFieldChange,
                     validations: "isExisty,isNumeric,isInt,averagePatienceBoundaries",
-                    validationError: "Value must be between 1 and 1000",
+                    validationError: this.state.validationErrors.averagePatienceBoundaries,
                     required: true
                   })
                 })]
@@ -5553,7 +5529,7 @@ var Table = /*#__PURE__*/function (_Component) {
                     label: "%",
                     handleFieldChange: this.handleFieldChange,
                     validations: "isExisty,isNumeric,isInt,percentageBoundaries",
-                    validationError: "Value must be between 1 and 100",
+                    validationError: this.state.validationErrors.weekWorkHoursBoundaries,
                     required: true
                   })
                 })]
@@ -5580,7 +5556,7 @@ var Table = /*#__PURE__*/function (_Component) {
                     label: "Minutes",
                     handleFieldChange: this.handleFieldChange,
                     validations: "isExisty,isNumeric,isInt,reportIntervalBoundaries",
-                    validationError: "Value must be between 1 and 1000",
+                    validationError: this.state.validationErrors.reportIntervalBoundaries,
                     required: true
                   })
                 })]
@@ -5630,6 +5606,54 @@ var Table = /*#__PURE__*/function (_Component) {
         selections: _objectSpread(_objectSpread({}, this.state.selections), {}, {
           timePeriodUnits: evt.target.value
         })
+      });
+    }
+  }, {
+    key: "setupValidators",
+    value: function setupValidators() {
+      var _this3 = this;
+      // Custom validators.
+      (0,formsy_react__WEBPACK_IMPORTED_MODULE_3__.addValidationRule)('incomingCallsBoundaries', function (values, value) {
+        return value > 0 && value <= 30000;
+      });
+      (0,formsy_react__WEBPACK_IMPORTED_MODULE_3__.addValidationRule)('timePeriodBoundaries', function (values, value) {
+        // To-minutes conversion.
+        var converted = value;
+        switch (_this3.state.selections.timePeriodUnits) {
+          case 'seconds':
+            converted = value / 60;
+          case 'minutes':
+            converted = value;
+            break;
+          case 'hours':
+            converted = value * 60;
+            break;
+          case 'months':
+            converted = value * 60 * 31;
+            break;
+          default:
+            converted = value;
+            break;
+        }
+        return converted > 0 && converted <= 1000;
+      });
+      (0,formsy_react__WEBPACK_IMPORTED_MODULE_3__.addValidationRule)('percentageBoundaries', function (values, value) {
+        return value >= 0 && value <= 100;
+      });
+      (0,formsy_react__WEBPACK_IMPORTED_MODULE_3__.addValidationRule)('handleTimeBoundaries', function (values, value) {
+        return value > 0 && value <= 30000;
+      });
+      (0,formsy_react__WEBPACK_IMPORTED_MODULE_3__.addValidationRule)('targetAnswerTimeBoundaries', function (values, value) {
+        return value > 0 && value <= 30000;
+      });
+      (0,formsy_react__WEBPACK_IMPORTED_MODULE_3__.addValidationRule)('averagePatienceBoundaries', function (values, value) {
+        return value > 0 && value <= 1000;
+      });
+      (0,formsy_react__WEBPACK_IMPORTED_MODULE_3__.addValidationRule)('weekWorkHoursBoundaries', function (values, value) {
+        return value > 0 && value <= 80;
+      });
+      (0,formsy_react__WEBPACK_IMPORTED_MODULE_3__.addValidationRule)('reportIntervalBoundaries', function (values, value) {
+        return value >= 5 && value <= 1500;
       });
     }
   }]);
