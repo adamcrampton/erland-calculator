@@ -12,6 +12,7 @@ class App extends Component {
             resultsVisible: false
         };
 
+        this.calculate = this.calculate.bind(this);
         this.startOver = this.startOver.bind(this);
         this.toggleResults = this.toggleResults.bind(this);
         this.toggleForm = this.toggleForm.bind(this);
@@ -24,6 +25,7 @@ class App extends Component {
                     showResults={ this.showResults }
                     toggleForm={ this.toggleForm }
                     startOver={ this.startOver }
+                    calculate={ this.calculate }
                 />
                 <Results 
                     visible={ this.state.resultsVisible } 
@@ -33,6 +35,31 @@ class App extends Component {
                 />
             </div>
         );
+    }
+    calculate(data) {
+        // Make a copy and convert Time Period field.
+        const dataSet = data;
+        dataSet.timePeriod = this.convertToMinutes(data.timePeriod, 'minutes');
+
+        console.log(dataSet);
+    }
+    convertToMinutes(value, unit) {
+        switch (unit) {
+            case 'seconds':
+                return value / 60;
+            case 'minutes':
+                return value;
+            break;
+            case 'hours':
+                return value * 60;
+            break;
+            case 'months':
+                return value * 60 * 31;
+            break;
+            default:
+                return value;
+            break;
+        }
     }
     showResults() {
         const form = document.getElementById('collapse-form');

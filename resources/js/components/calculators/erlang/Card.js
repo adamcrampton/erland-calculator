@@ -4,12 +4,7 @@ import Table from './Table';
 class Card extends Component {
     constructor(props) {
         super(props);
-
         this.triggerCalculated = this.triggerCalculated.bind(this);
-
-        this.calculations = {
-
-        };
     }
     render() {
         return (
@@ -35,11 +30,8 @@ class Card extends Component {
             </div>
         );
     };
-    calculate(data) {
-        console.log(data)
-    }
     triggerCalculated(evt, data) {
-        this.calculate(data);
+        this.props.calculate(data);
         this.props.showResults();
     }
 }

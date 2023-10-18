@@ -22,7 +22,7 @@ class Table extends Component {
             targetAnswerTime: 30,
             timePeriod: 60,
             selections: {
-                timePeriodUnits: 'seconds'
+                timePeriodUnits: 'minutes'
             },
             weekWorkHours: 40
         };

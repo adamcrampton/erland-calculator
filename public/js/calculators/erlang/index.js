@@ -4796,6 +4796,7 @@ var App = /*#__PURE__*/function (_Component) {
       cardVisible: true,
       resultsVisible: false
     };
+    _this.calculate = _this.calculate.bind(_assertThisInitialized(_this));
     _this.startOver = _this.startOver.bind(_assertThisInitialized(_this));
     _this.toggleResults = _this.toggleResults.bind(_assertThisInitialized(_this));
     _this.toggleForm = _this.toggleForm.bind(_assertThisInitialized(_this));
@@ -4810,7 +4811,8 @@ var App = /*#__PURE__*/function (_Component) {
           visible: this.state.cardVisible,
           showResults: this.showResults,
           toggleForm: this.toggleForm,
-          startOver: this.startOver
+          startOver: this.startOver,
+          calculate: this.calculate
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_Results__WEBPACK_IMPORTED_MODULE_2__["default"], {
           visible: this.state.resultsVisible,
           showResults: this.showResults,
@@ -4818,6 +4820,34 @@ var App = /*#__PURE__*/function (_Component) {
           startOver: this.startOver
         })]
       });
+    }
+  }, {
+    key: "calculate",
+    value: function calculate(data) {
+      // Make a copy and convert Time Period field.
+      var dataSet = data;
+      dataSet.timePeriod = this.convertToMinutes(data.timePeriod, 'minutes');
+      console.log(dataSet);
+    }
+  }, {
+    key: "convertToMinutes",
+    value: function convertToMinutes(value, unit) {
+      switch (unit) {
+        case 'seconds':
+          return value / 60;
+        case 'minutes':
+          return value;
+          break;
+        case 'hours':
+          return value * 60;
+          break;
+        case 'months':
+          return value * 60 * 31;
+          break;
+        default:
+          return value;
+          break;
+      }
     }
   }, {
     key: "showResults",
@@ -4894,7 +4924,6 @@ var Card = /*#__PURE__*/function (_Component) {
     _classCallCheck(this, Card);
     _this = _super.call(this, props);
     _this.triggerCalculated = _this.triggerCalculated.bind(_assertThisInitialized(_this));
-    _this.calculations = {};
     return _this;
   }
   _createClass(Card, [{
@@ -4932,14 +4961,9 @@ var Card = /*#__PURE__*/function (_Component) {
       });
     }
   }, {
-    key: "calculate",
-    value: function calculate(data) {
-      console.log(data);
-    }
-  }, {
     key: "triggerCalculated",
     value: function triggerCalculated(evt, data) {
-      this.calculate(data);
+      this.props.calculate(data);
       this.props.showResults();
     }
   }]);
@@ -5179,7 +5203,7 @@ var Table = /*#__PURE__*/function (_Component) {
       targetAnswerTime: 30,
       timePeriod: 60,
       selections: {
-        timePeriodUnits: 'seconds'
+        timePeriodUnits: 'minutes'
       },
       weekWorkHours: 40
     };
@@ -5831,13 +5855,14 @@ var TimeUnitSelect = /*#__PURE__*/function (_Component) {
   _createClass(TimeUnitSelect, [{
     key: "render",
     value: function render() {
+      var _this = this;
       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("select", {
         className: "form-control form-control-sm form-select",
-        selected: this.props.selected,
         onChange: this.props.handleTimePeriodUnitChange,
         children: this.props.units.map(function (unit) {
           return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("option", {
             value: unit,
+            selected: unit == _this.props.selected,
             children: unit
           }, unit);
         })
