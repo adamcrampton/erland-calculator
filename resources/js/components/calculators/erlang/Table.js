@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import CommonPopover from '../../common/ui/CommonPopover';
 import FormInput from '../../common/forms/FormInput';
 import Formsy, { addValidationRule } from 'formsy-react';
+import TimeUnitSelect from '../../common/forms/TimeUnitSelect';
 
 class Table extends Component {
     constructor(props) {
@@ -39,7 +40,7 @@ class Table extends Component {
         addValidationRule('timePeriodBoundaries', (values, value) => {
             // To-minutes conversion.
             let converted = value;
-            switch (this.selections.timePeriodUnits) {
+            switch (this.state.selections.timePeriodUnits) {
                 case 'seconds':
                     converted = value / 60;
                 case 'minutes':
@@ -57,12 +58,12 @@ class Table extends Component {
             }
             return converted > 0 && converted <= 1000
         });
-        addValidationRule('percentage', (values, value) => value >= 0 && value <= 100);
-        addValidationRule('handleTime', (values, value) => value > 0 && value <= 1000);
-        addValidationRule('targetAnswerTime', (values, value) => value > 0 && value <= 1000);
-        addValidationRule('averagePatience', (values, value) => value > 0 && value <= 1000);
-        addValidationRule('weekWorkHours', (values, value) => value > 0 && value <= 80);
-        addValidationRule('reportInterval', (values, value) => value > 0 && value <= 1000);
+        addValidationRule('percentageBoundaries', (values, value) => value >= 0 && value <= 100);
+        addValidationRule('handleTimeBoundaries', (values, value) => value > 0 && value <= 1000);
+        addValidationRule('targetAnswerTimeBoundaries', (values, value) => value > 0 && value <= 1000);
+        addValidationRule('averagePatienceBoundaries', (values, value) => value > 0 && value <= 1000);
+        addValidationRule('weekWorkHoursBoundaries', (values, value) => value > 0 && value <= 80);
+        addValidationRule('reportIntervalBoundaries', (values, value) => value > 0 && value <= 1000);
 
         // State change handlers.
         this.handleFieldChange = this.handleFieldChange.bind(this);
@@ -94,23 +95,14 @@ class Table extends Component {
                             <td>
                                 <FormInput 
                                     className="form-control form-control-sm"
-                                    type="number"
                                     name="incomingCalls"
+                                    type="number"
                                     value={ this.state.incomingCalls }
                                     handleFieldChange={ this.handleFieldChange }
                                     validations="isExisty,isNumeric,isInt,incomingCallsBoundaries"
                                     validationError="Value must be between 1 and 1000"
                                     required
                                 />
-                                
-                                {/* <input 
-                                    className="form-control form-control-sm"
-                                    name="incomingCalls"
-                                    type="number"
-                                    min="0"
-                                    onChange={ this.handleFieldChange }
-                                    value={ this.state.incomingCalls }
-                                /> */}
                             </td>
                         </tr>
                         <tr>
@@ -127,22 +119,22 @@ class Table extends Component {
                                 />
                             </td>
                             <td>
-                                <div className="input-group">
-                                    <input 
+                                <div className="input-group input-group-sm">
+                                    <FormInput
                                         className="form-control form-control-sm"
                                         name="timePeriod"
                                         type="number"
-                                        min="0"
-                                        onChange={ this.handleFieldChange }
                                         value={ this.state.timePeriod }
+                                        handleFieldChange={ this.handleFieldChange }
+                                        validations="isExisty,isNumeric,isInt,timePeriodBoundaries"
+                                        validationError="Value must be between 1 and 1000"
+                                        required
                                     />
-                                    <select 
-                                        className="form-control form-control-sm form-select"
+                                    <TimeUnitSelect
                                         selected={ this.state.selections.timePeriodUnits }
-                                        onChange={ this.handleTimePeriodUnitChange }
-                                    >
-                                        { this.units.map(unit => ( <option key={unit} value={unit}>{unit}</option> )) }
-                                    </select>
+                                        handleTimePeriodUnitChange={ this.handleTimePeriodUnitChange }
+                                        units={ this.units }
+                                    />
                                 </div>
                             </td>
                         </tr>
@@ -382,27 +374,27 @@ class Table extends Component {
         );
     }
 
-    // Convert value to selected units + update state.
-    convertTimePeriod(evt) {
-        const value = evt.target.value;
+    // // Convert value to selected units + update state.
+    // convertTimePeriod(evt) {
+    //     const value = evt.target.value;
 
-        switch (this.state.selections.timePeriodUnits) {
-            case 'seconds':
-                return value / 60;
-            case 'minutes':
-                return value;
-            break;
-            case 'hours':
-                return value * 60;
-            break;
-            case 'months':
-                return value * 60 * 31;
-            break;
-            default:
-                return value;
-            break;
-        }
-    }
+    //     switch (this.state.selections.timePeriodUnits) {
+    //         case 'seconds':
+    //             return value / 60;
+    //         case 'minutes':
+    //             return value;
+    //         break;
+    //         case 'hours':
+    //             return value * 60;
+    //         break;
+    //         case 'months':
+    //             return value * 60 * 31;
+    //         break;
+    //         default:
+    //             return value;
+    //         break;
+    //     }
+    // }
     disableButton() {
         this.setState({ canSubmit: false });
     }
