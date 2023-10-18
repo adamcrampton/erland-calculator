@@ -9,8 +9,9 @@ class TimeUnitSelect extends Component {
             <select 
                 className="form-control form-control-sm form-select"
                 onChange={ this.props.handleTimePeriodUnitChange }
+                defaultValue={ this.props.selected }
             >
-                { this.props.units.map(unit => (<option key={unit} value={unit} selected={ unit == this.props.selected }>{unit}</option>)) }
+                { this.props.units.map(unit => (<option key={unit} value={unit}>{unit}</option>)) }
             </select>
         );
     }

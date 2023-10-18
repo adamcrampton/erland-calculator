@@ -5855,14 +5855,13 @@ var TimeUnitSelect = /*#__PURE__*/function (_Component) {
   _createClass(TimeUnitSelect, [{
     key: "render",
     value: function render() {
-      var _this = this;
       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("select", {
         className: "form-control form-control-sm form-select",
         onChange: this.props.handleTimePeriodUnitChange,
+        defaultValue: this.props.selected,
         children: this.props.units.map(function (unit) {
           return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("option", {
             value: unit,
-            selected: unit == _this.props.selected,
             children: unit
           }, unit);
         })
