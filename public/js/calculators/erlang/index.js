@@ -5169,13 +5169,13 @@ var Table = /*#__PURE__*/function (_Component) {
     _this.state = {
       canSubmit: false,
       calculateAllowed: 0,
-      averagePatience: 0,
-      handleTime: 0,
-      maxOccupancy: 0,
+      averagePatience: 60,
+      handleTime: 240,
+      maxOccupancy: 90,
       incomingCalls: 100,
-      reportInterval: 0,
+      reportInterval: 60,
       serviceLevel: 90,
-      shrinkage: 0,
+      shrinkage: 25,
       targetAnswerTime: 30,
       timePeriod: 60,
       selections: {
@@ -5356,19 +5356,16 @@ var Table = /*#__PURE__*/function (_Component) {
                     placement: "top"
                   })]
                 }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("td", {
-                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
-                    className: "input-group",
-                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("input", {
-                      className: "form-control form-control-sm",
-                      name: "serviceLevel",
-                      type: "number",
-                      min: "0",
-                      onChange: this.handleFieldChange,
-                      value: this.state.serviceLevel
-                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("span", {
-                      className: "input-group-text",
-                      children: "%"
-                    })]
+                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_common_forms_FormGroupInput__WEBPACK_IMPORTED_MODULE_5__["default"], {
+                    className: "form-control form-control-sm",
+                    name: "serviceLevel",
+                    type: "number",
+                    value: this.state.serviceLevel,
+                    label: "%",
+                    handleFieldChange: this.handleFieldChange,
+                    validations: "isExisty,isNumeric,isInt,percentageBoundaries",
+                    validationError: "Value must be between 1 and 100",
+                    required: true
                   })
                 })]
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("tr", {
@@ -5386,19 +5383,16 @@ var Table = /*#__PURE__*/function (_Component) {
                     placement: "top"
                   })]
                 }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("td", {
-                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
-                    className: "input-group",
-                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("input", {
-                      className: "form-control form-control-sm",
-                      name: "targetAnswerTime",
-                      type: "number",
-                      min: "0",
-                      onChange: this.handleFieldChange,
-                      value: this.state.targetAnswerTime
-                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("span", {
-                      className: "input-group-text",
-                      children: "Seconds"
-                    })]
+                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_common_forms_FormGroupInput__WEBPACK_IMPORTED_MODULE_5__["default"], {
+                    className: "form-control form-control-sm",
+                    name: "targetAnswerTime",
+                    type: "number",
+                    value: this.state.targetAnswerTime,
+                    label: "Seconds",
+                    handleFieldChange: this.handleFieldChange,
+                    validations: "isExisty,isNumeric,isInt,targetAnswerTimeBoundaries",
+                    validationError: "Value must be between 1 and 1000",
+                    required: true
                   })
                 })]
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("tr", {
@@ -5416,19 +5410,16 @@ var Table = /*#__PURE__*/function (_Component) {
                     placement: "top"
                   })]
                 }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("td", {
-                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
-                    className: "input-group",
-                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("input", {
-                      className: "form-control form-control-sm",
-                      name: "maxOccupancy",
-                      type: "number",
-                      min: "0",
-                      onChange: this.handleFieldChange,
-                      value: this.state.maxOccupancy
-                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("span", {
-                      className: "input-group-text",
-                      children: "%"
-                    })]
+                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_common_forms_FormGroupInput__WEBPACK_IMPORTED_MODULE_5__["default"], {
+                    className: "form-control form-control-sm",
+                    name: "maxOccupancy",
+                    type: "number",
+                    value: this.state.maxOccupancy,
+                    label: "%",
+                    handleFieldChange: this.handleFieldChange,
+                    validations: "isExisty,isNumeric,isInt,percentageBoundaries",
+                    validationError: "Value must be between 1 and 100",
+                    required: true
                   })
                 })]
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("tr", {
@@ -5446,19 +5437,16 @@ var Table = /*#__PURE__*/function (_Component) {
                     placement: "top"
                   })]
                 }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("td", {
-                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
-                    className: "input-group",
-                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("input", {
-                      className: "form-control form-control-sm",
-                      name: "shrinkage",
-                      type: "number",
-                      min: "0",
-                      onChange: this.handleFieldChange,
-                      value: this.state.shrinkage
-                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("span", {
-                      className: "input-group-text",
-                      children: "%"
-                    })]
+                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_common_forms_FormGroupInput__WEBPACK_IMPORTED_MODULE_5__["default"], {
+                    className: "form-control form-control-sm",
+                    name: "shrinkage",
+                    type: "number",
+                    value: this.state.shrinkage,
+                    label: "%",
+                    handleFieldChange: this.handleFieldChange,
+                    validations: "isExisty,isNumeric,isInt,percentageBoundaries",
+                    validationError: "Value must be between 1 and 100",
+                    required: true
                   })
                 })]
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("tr", {
@@ -5476,19 +5464,16 @@ var Table = /*#__PURE__*/function (_Component) {
                     placement: "top"
                   })]
                 }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("td", {
-                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
-                    className: "input-group",
-                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("input", {
-                      className: "form-control form-control-sm",
-                      name: "averagePatience",
-                      type: "number",
-                      min: "0",
-                      onChange: this.handleFieldChange,
-                      value: this.state.averagePatience
-                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("span", {
-                      className: "input-group-text",
-                      children: "seconds"
-                    })]
+                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_common_forms_FormGroupInput__WEBPACK_IMPORTED_MODULE_5__["default"], {
+                    className: "form-control form-control-sm",
+                    name: "averagePatience",
+                    type: "number",
+                    value: this.state.averagePatience,
+                    label: "Seconds",
+                    handleFieldChange: this.handleFieldChange,
+                    validations: "isExisty,isNumeric,isInt,averagePatienceBoundaries",
+                    validationError: "Value must be between 1 and 1000",
+                    required: true
                   })
                 })]
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("tr", {
@@ -5506,19 +5491,16 @@ var Table = /*#__PURE__*/function (_Component) {
                     placement: "top"
                   })]
                 }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("td", {
-                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
-                    className: "input-group",
-                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("input", {
-                      className: "form-control form-control-sm",
-                      name: "weekWorkHours",
-                      type: "number",
-                      min: "0",
-                      onChange: this.handleFieldChange,
-                      value: this.state.weekWorkHours
-                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("span", {
-                      className: "input-group-text",
-                      children: "%"
-                    })]
+                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_common_forms_FormGroupInput__WEBPACK_IMPORTED_MODULE_5__["default"], {
+                    className: "form-control form-control-sm",
+                    name: "weekWorkHours",
+                    type: "number",
+                    value: this.state.weekWorkHours,
+                    label: "%",
+                    handleFieldChange: this.handleFieldChange,
+                    validations: "isExisty,isNumeric,isInt,percentageBoundaries",
+                    validationError: "Value must be between 1 and 100",
+                    required: true
                   })
                 })]
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("tr", {
@@ -5536,19 +5518,16 @@ var Table = /*#__PURE__*/function (_Component) {
                     placement: "top"
                   })]
                 }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("td", {
-                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
-                    className: "input-group",
-                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("input", {
-                      className: "form-control form-control-sm",
-                      name: "reportInterval",
-                      type: "number",
-                      min: "0",
-                      onChange: this.handleFieldChange,
-                      value: this.state.reportInterval
-                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("span", {
-                      className: "input-group-text",
-                      children: "minutes"
-                    })]
+                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_common_forms_FormGroupInput__WEBPACK_IMPORTED_MODULE_5__["default"], {
+                    className: "form-control form-control-sm",
+                    name: "reportInterval",
+                    type: "number",
+                    value: this.state.reportInterval,
+                    label: "Minutes",
+                    handleFieldChange: this.handleFieldChange,
+                    validations: "isExisty,isNumeric,isInt,reportIntervalBoundaries",
+                    validationError: "Value must be between 1 and 1000",
+                    required: true
                   })
                 })]
               })]

@@ -12,13 +12,13 @@ class Table extends Component {
         this.state = {
             canSubmit: false,
             calculateAllowed: 0,
-            averagePatience: 0,
-            handleTime: 0,
-            maxOccupancy: 0,
+            averagePatience: 60,
+            handleTime: 240,
+            maxOccupancy: 90,
             incomingCalls: 100,
-            reportInterval: 0,
+            reportInterval: 60,
             serviceLevel: 90,
-            shrinkage: 0,
+            shrinkage: 25,
             targetAnswerTime: 30,
             timePeriod: 60,
             selections: {
@@ -182,17 +182,17 @@ class Table extends Component {
                                 />
                             </td>
                             <td>
-                                <div className="input-group">
-                                    <input 
-                                        className="form-control form-control-sm"
-                                        name="serviceLevel"
-                                        type="number"
-                                        min="0"
-                                        onChange={ this.handleFieldChange }
-                                        value={ this.state.serviceLevel }
-                                    />
-                                    <span className="input-group-text">%</span>
-                                </div>
+                                <FormGroupInput
+                                    className="form-control form-control-sm"
+                                    name="serviceLevel"
+                                    type="number"
+                                    value={ this.state.serviceLevel }
+                                    label="%"
+                                    handleFieldChange={ this.handleFieldChange }
+                                    validations="isExisty,isNumeric,isInt,percentageBoundaries"
+                                    validationError="Value must be between 1 and 100"
+                                    required
+                                />
                             </td>
                         </tr>
                         <tr>
@@ -209,17 +209,17 @@ class Table extends Component {
                                 />
                             </td>
                             <td>
-                                <div className="input-group">
-                                    <input 
-                                        className="form-control form-control-sm"
-                                        name="targetAnswerTime"
-                                        type="number"
-                                        min="0"
-                                        onChange={ this.handleFieldChange }
-                                        value={ this.state.targetAnswerTime }
-                                    />
-                                     <span className="input-group-text">Seconds</span>
-                                </div>
+                                <FormGroupInput
+                                    className="form-control form-control-sm"
+                                    name="targetAnswerTime"
+                                    type="number"
+                                    value={ this.state.targetAnswerTime }
+                                    label="Seconds"
+                                    handleFieldChange={ this.handleFieldChange }
+                                    validations="isExisty,isNumeric,isInt,targetAnswerTimeBoundaries"
+                                    validationError="Value must be between 1 and 1000"
+                                    required
+                                />
                             </td>
                         </tr>
                         <tr>
@@ -236,17 +236,17 @@ class Table extends Component {
                                 />
                             </td>
                             <td>
-                                <div className="input-group">
-                                    <input 
-                                        className="form-control form-control-sm"
-                                        name="maxOccupancy"
-                                        type="number"
-                                        min="0"
-                                        onChange={ this.handleFieldChange }
-                                        value={ this.state.maxOccupancy }
-                                    />
-                                    <span className="input-group-text">%</span>
-                                </div>
+                                <FormGroupInput
+                                    className="form-control form-control-sm"
+                                    name="maxOccupancy"
+                                    type="number"
+                                    value={ this.state.maxOccupancy }
+                                    label="%"
+                                    handleFieldChange={ this.handleFieldChange }
+                                    validations="isExisty,isNumeric,isInt,percentageBoundaries"
+                                    validationError="Value must be between 1 and 100"
+                                    required
+                                />
                             </td>
                         </tr>
                         <tr>
@@ -263,17 +263,17 @@ class Table extends Component {
                                 />
                             </td>
                             <td>
-                                <div className="input-group">
-                                    <input 
-                                        className="form-control form-control-sm"
-                                        name="shrinkage"
-                                        type="number"
-                                        min="0"
-                                        onChange={ this.handleFieldChange }
-                                        value={ this.state.shrinkage }
-                                    />
-                                    <span className="input-group-text">%</span>
-                                </div>
+                                <FormGroupInput
+                                    className="form-control form-control-sm"
+                                    name="shrinkage"
+                                    type="number"
+                                    value={ this.state.shrinkage }
+                                    label="%"
+                                    handleFieldChange={ this.handleFieldChange }
+                                    validations="isExisty,isNumeric,isInt,percentageBoundaries"
+                                    validationError="Value must be between 1 and 100"
+                                    required
+                                />
                             </td>
                         </tr>
                         <tr>
@@ -290,17 +290,17 @@ class Table extends Component {
                                 />
                             </td>
                             <td>
-                                <div className="input-group">
-                                    <input 
-                                        className="form-control form-control-sm"
-                                        name="averagePatience"
-                                        type="number"
-                                        min="0"
-                                        onChange={ this.handleFieldChange }
-                                        value={ this.state.averagePatience }
-                                    />
-                                    <span className="input-group-text">seconds</span>
-                                </div>
+                                <FormGroupInput
+                                    className="form-control form-control-sm"
+                                    name="averagePatience"
+                                    type="number"
+                                    value={ this.state.averagePatience }
+                                    label="Seconds"
+                                    handleFieldChange={ this.handleFieldChange }
+                                    validations="isExisty,isNumeric,isInt,averagePatienceBoundaries"
+                                    validationError="Value must be between 1 and 1000"
+                                    required
+                                />
                             </td>
                         </tr>
                         <tr>
@@ -317,17 +317,17 @@ class Table extends Component {
                                 />
                             </td>
                             <td>
-                                <div className="input-group">
-                                    <input 
-                                        className="form-control form-control-sm"
-                                        name="weekWorkHours"
-                                        type="number"
-                                        min="0"
-                                        onChange={ this.handleFieldChange }
-                                        value={ this.state.weekWorkHours }
-                                    />
-                                    <span className="input-group-text">%</span>
-                                </div>
+                                <FormGroupInput
+                                    className="form-control form-control-sm"
+                                    name="weekWorkHours"
+                                    type="number"
+                                    value={ this.state.weekWorkHours }
+                                    label="%"
+                                    handleFieldChange={ this.handleFieldChange }
+                                    validations="isExisty,isNumeric,isInt,percentageBoundaries"
+                                    validationError="Value must be between 1 and 100"
+                                    required
+                                />
                             </td>
                         </tr>
                         <tr>
@@ -344,17 +344,17 @@ class Table extends Component {
                                 />
                             </td>
                             <td>
-                                <div className="input-group">
-                                    <input 
-                                        className="form-control form-control-sm"
-                                        name="reportInterval"
-                                        type="number"
-                                        min="0"
-                                        onChange={ this.handleFieldChange }
-                                        value={ this.state.reportInterval }
-                                    />
-                                    <span className="input-group-text">minutes</span>
-                                </div>
+                                <FormGroupInput
+                                    className="form-control form-control-sm"
+                                    name="reportInterval"
+                                    type="number"
+                                    value={ this.state.reportInterval }
+                                    label="Minutes"
+                                    handleFieldChange={ this.handleFieldChange }
+                                    validations="isExisty,isNumeric,isInt,reportIntervalBoundaries"
+                                    validationError="Value must be between 1 and 1000"
+                                    required
+                                />
                             </td>
                         </tr>
                     </tbody>
