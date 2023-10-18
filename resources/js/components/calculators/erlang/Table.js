@@ -3,6 +3,7 @@ import CommonPopover from '../../common/ui/CommonPopover';
 import FormInput from '../../common/forms/FormInput';
 import Formsy, { addValidationRule } from 'formsy-react';
 import TimeUnitSelect from '../../common/forms/TimeUnitSelect';
+import FormGroupInput from '../../common/forms/FormGroupInput';
 
 class Table extends Component {
     constructor(props) {
@@ -153,15 +154,17 @@ class Table extends Component {
                             </td>
                             <td>
                                 <div className="input-group">
-                                    <input 
+                                    <FormGroupInput
                                         className="form-control form-control-sm"
                                         name="handleTime"
                                         type="number"
-                                        min="0"
-                                        onChange={ this.handleFieldChange }
                                         value={ this.state.handleTime }
+                                        label="Seconds"
+                                        handleFieldChange={ this.handleFieldChange }
+                                        validations="isExisty,isNumeric,isInt,handleTimeBoundaries"
+                                        validationError="Value must be between 1 and 1000"
+                                        required
                                     />
-                                     <span className="input-group-text">Seconds</span>
                                 </div>
                             </td>
                         </tr>
