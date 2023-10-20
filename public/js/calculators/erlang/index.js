@@ -4804,6 +4804,7 @@ var App = /*#__PURE__*/function (_Component) {
         calls: 0,
         callHasToWait: 0,
         callsPerHour: 0,
+        immediateAnswer: 0,
         intensity: 0,
         occupancy: 0,
         serviceLevel: 0,
@@ -4858,7 +4859,12 @@ var App = /*#__PURE__*/function (_Component) {
       var callMinutes = data.incomingCalls * (data.handleTime / 60);
       var intensity = callMinutes / 60;
       var agents = parseInt(intensity + 1);
-      var occupancy = parseInt(intensity / agents) * 100;
+      var occupancy = intensity / agents * 100;
+
+      // Update if Shrinkage is a factor.
+      if (data.shrinkage) {
+        agents = agents / (1 - data.shrinkage / 100);
+      }
 
       // Work out N! (N Factorial) for formula (N = Number of Agents).
       var nFactorial = this.getFactorial(agents);
@@ -4886,17 +4892,26 @@ var App = /*#__PURE__*/function (_Component) {
       var slPreCalc = -(agents - intensity) * (data.targetAnswerTime / data.handleTime);
       var serviceLevel = (1 - callHasToWait * Math.exp(slPreCalc)) * 100;
 
+      // Calculate Average Speed To Answer.
+      var speedToAnswer = callHasToWait * data.handleTime / (agents - intensity);
+
+      // Calculate percentage of calls answered immediately.
+      var immediateAnswer = (1 - callHasToWait) * 100;
+
       // Set values for linked components.
       this.setState({
         dataSet: dataSet,
         selections: dataSet.selections,
         results: _objectSpread(_objectSpread({}, this.state.results), {}, {
-          agents: agents,
+          agents: Math.round(agents),
           callHasToWait: callHasToWait,
           callsPerHours: callsPerHour,
+          immediateAnswer: immediateAnswer,
           intensity: intensity,
           occupancy: parseFloat(occupancy).toFixed(2),
           serviceLevel: parseFloat(serviceLevel).toFixed(2),
+          shrinkage: data.shrinkage,
+          speedToAnswer: parseFloat(speedToAnswer).toFixed(2),
           totalCallMinutes: callMinutes
         })
       });
@@ -5204,12 +5219,12 @@ var Results = /*#__PURE__*/function (_Component) {
                 className: "card-text",
                 children: ["Based on the above data, the Service Level Calculated is ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("strong", {
                   children: this.props.results.serviceLevel
-                }), ", with an Average Speed To Answer of ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("strong", {
-                  children: this.props.results.speedToAnswer
+                }), ", with an Average Speed To Answer of ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("strong", {
+                  children: [this.props.results.speedToAnswer, " seconds"]
                 }), "."]
               })]
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
-              className: "text-center",
+              className: "text-center mt-2",
               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
                 className: "btn btn-sm btn-u-violet me-1",
                 onClick: this.props.toggleForm,

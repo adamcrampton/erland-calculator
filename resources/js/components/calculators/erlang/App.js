@@ -16,6 +16,7 @@ class App extends Component {
                 calls: 0,
                 callHasToWait: 0,
                 callsPerHour: 0,
+                immediateAnswer: 0,
                 intensity: 0,
                 occupancy: 0,
                 serviceLevel: 0,
@@ -67,8 +68,13 @@ class App extends Component {
         const callsPerHour = (60 / data.timePeriod) * data.incomingCalls;
         const callMinutes = data.incomingCalls * (data.handleTime / 60);
         const intensity = callMinutes / 60;
-        const agents = parseInt(intensity + 1);
-        const occupancy = parseInt(intensity / agents) * 100;
+        let agents = parseInt(intensity + 1);
+        const occupancy = (intensity / agents) * 100;
+
+        // Update if Shrinkage is a factor.
+        if (data.shrinkage) {
+            agents = agents / (1 - (data.shrinkage / 100));
+        }
 
         // Work out N! (N Factorial) for formula (N = Number of Agents).
         const nFactorial = this.getFactorial(agents);
@@ -97,18 +103,27 @@ class App extends Component {
         const slPreCalc = -(agents - intensity) * (data.targetAnswerTime / data.handleTime);
         const serviceLevel = (1 - (callHasToWait * Math.exp(slPreCalc))) * 100;
 
+        // Calculate Average Speed To Answer.
+        const speedToAnswer = (callHasToWait * data.handleTime) / (agents - intensity);
+
+        // Calculate percentage of calls answered immediately.
+        const immediateAnswer = (1 - callHasToWait) * 100;
+
         // Set values for linked components.
         this.setState({
             dataSet: dataSet,
             selections: dataSet.selections,
             results: {
                 ...this.state.results,
-                agents: agents,
+                agents: Math.round(agents),
                 callHasToWait: callHasToWait,
                 callsPerHours: callsPerHour,
+                immediateAnswer: immediateAnswer,
                 intensity: intensity,
                 occupancy: parseFloat(occupancy).toFixed(2),
                 serviceLevel: parseFloat(serviceLevel).toFixed(2),
+                shrinkage: data.shrinkage,
+                speedToAnswer: parseFloat(speedToAnswer).toFixed(2),
                 totalCallMinutes: callMinutes
             }
         });
