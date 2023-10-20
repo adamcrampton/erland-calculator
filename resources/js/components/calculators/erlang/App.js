@@ -14,11 +14,14 @@ class App extends Component {
             results: {
                 agents: 0,
                 calls: 0,
+                callHasToWait: 0,
+                callsPerHour: 0,
                 intensity: 0,
                 occupancy: 0,
                 serviceLevel: 0,
                 shrinkage: 0,
-                speedToAnswer: 0
+                speedToAnswer: 0,
+                totalCallMinutes: 0
             },
             selections: {
                 timePeriodUnits: 'minutes'
@@ -57,9 +60,42 @@ class App extends Component {
         const dataSet = data;
         dataSet.timePeriod = this.convertToMinutes(data.timePeriod, 'minutes');
 
-        // Process calculations.
-        const intensity = (data.incomingCalls / (data.reportInterval * 60)) * data.handleTime;
-        const agents = parseInt(intensity);
+        // Process calculations using Erlang C Formula.
+        // See: https://www.callcentrehelper.com/erlang-c-formula-example-121281.htm
+        // =====================
+        // Base data.
+        const callsPerHour = (60 / data.timePeriod) * data.incomingCalls;
+        const callMinutes = data.incomingCalls * (data.handleTime / 60);
+        const intensity = callMinutes / 60;
+        const agents = parseInt(intensity + 1);
+        const occupancy = parseInt(intensity / agents) * 100;
+
+        // Work out N! (N Factorial) for formula (N = Number of Agents).
+        const nFactorial = this.getFactorial(agents);
+
+        // Work out powers A_N (Traffic Intensity to the power of N).
+        const aPowers = Math.pow(parseInt(intensity), agents);
+
+        // Work out top row of Erlang formula.
+        // aPowers / nFactorial * agents
+        const formulaTop = (aPowers / nFactorial) * (agents / (agents + intensity));
+
+        // Work out sum of a series, looping until counter is N-1.
+        let sumOfSeries = 0;
+
+        for (let index = 0; index <= agents; index++) {
+            sumOfSeries+= Math.pow(intensity, index) / this.getFactorial(index);
+        }
+
+        // Take top row (X) and sumOfSeries (Y) and put into formula.
+        // Pw = X / (Y + X)
+        // This works out the probability that the call has to wait.
+        const callHasToWait = formulaTop / (sumOfSeries + formulaTop);
+
+        // Next we calculate service level.
+        // See above link for explanation, easier to do in 2 steps.
+        const slPreCalc = -(agents - intensity) * (data.targetAnswerTime / data.handleTime);
+        const serviceLevel = (1 - (callHasToWait * Math.exp(slPreCalc))) * 100;
 
         // Set values for linked components.
         this.setState({
@@ -68,7 +104,12 @@ class App extends Component {
             results: {
                 ...this.state.results,
                 agents: agents,
+                callHasToWait: callHasToWait,
+                callsPerHours: callsPerHour,
                 intensity: intensity,
+                occupancy: parseFloat(occupancy).toFixed(2),
+                serviceLevel: parseFloat(serviceLevel).toFixed(2),
+                totalCallMinutes: callMinutes
             }
         });
     }
@@ -89,6 +130,13 @@ class App extends Component {
                 return value;
             break;
         }
+    }
+    // https://stackoverflow.com/questions/3959211/what-is-the-fastest-factorial-function-in-javascript
+    getFactorial(num) {
+        let rval = 1;
+        for (let i = 2; i <= num; i++)
+            rval = rval * i;
+        return rval;
     }
     showResults() {
         const form = document.getElementById('collapse-form');

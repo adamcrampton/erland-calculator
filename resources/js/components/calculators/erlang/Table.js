@@ -306,7 +306,7 @@ class Table extends Component {
                                     value={ this.state.weekWorkHours }
                                     label="%"
                                     handleFieldChange={ this.handleFieldChange }
-                                    validations="isExisty,isNumeric,isInt,percentageBoundaries"
+                                    validations="isExisty,isNumeric,percentageBoundaries"
                                     validationError={ this.state.validationErrors.weekWorkHoursBoundaries }
                                     required
                                 />

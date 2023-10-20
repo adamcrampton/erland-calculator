@@ -4802,11 +4802,14 @@ var App = /*#__PURE__*/function (_Component) {
       results: {
         agents: 0,
         calls: 0,
+        callHasToWait: 0,
+        callsPerHour: 0,
         intensity: 0,
         occupancy: 0,
         serviceLevel: 0,
         shrinkage: 0,
-        speedToAnswer: 0
+        speedToAnswer: 0,
+        totalCallMinutes: 0
       },
       selections: {
         timePeriodUnits: 'minutes'
@@ -4847,9 +4850,41 @@ var App = /*#__PURE__*/function (_Component) {
       var dataSet = data;
       dataSet.timePeriod = this.convertToMinutes(data.timePeriod, 'minutes');
 
-      // Process calculations.
-      var intensity = data.incomingCalls / (data.reportInterval * 60) * data.handleTime;
-      var agents = parseInt(intensity);
+      // Process calculations using Erlang C Formula.
+      // See: https://www.callcentrehelper.com/erlang-c-formula-example-121281.htm
+      // =====================
+      // Base data.
+      var callsPerHour = 60 / data.timePeriod * data.incomingCalls;
+      var callMinutes = data.incomingCalls * (data.handleTime / 60);
+      var intensity = callMinutes / 60;
+      var agents = parseInt(intensity + 1);
+      var occupancy = parseInt(intensity / agents) * 100;
+
+      // Work out N! (N Factorial) for formula (N = Number of Agents).
+      var nFactorial = this.getFactorial(agents);
+
+      // Work out powers A_N (Traffic Intensity to the power of N).
+      var aPowers = Math.pow(parseInt(intensity), agents);
+
+      // Work out top row of Erlang formula.
+      // aPowers / nFactorial * agents
+      var formulaTop = aPowers / nFactorial * (agents / (agents + intensity));
+
+      // Work out sum of a series, looping until counter is N-1.
+      var sumOfSeries = 0;
+      for (var index = 0; index <= agents; index++) {
+        sumOfSeries += Math.pow(intensity, index) / this.getFactorial(index);
+      }
+
+      // Take top row (X) and sumOfSeries (Y) and put into formula.
+      // Pw = X / (Y + X)
+      // This works out the probability that the call has to wait.
+      var callHasToWait = formulaTop / (sumOfSeries + formulaTop);
+
+      // Next we calculate service level.
+      // See above link for explanation, easier to do in 2 steps.
+      var slPreCalc = -(agents - intensity) * (data.targetAnswerTime / data.handleTime);
+      var serviceLevel = (1 - callHasToWait * Math.exp(slPreCalc)) * 100;
 
       // Set values for linked components.
       this.setState({
@@ -4857,7 +4892,12 @@ var App = /*#__PURE__*/function (_Component) {
         selections: dataSet.selections,
         results: _objectSpread(_objectSpread({}, this.state.results), {}, {
           agents: agents,
-          intensity: intensity
+          callHasToWait: callHasToWait,
+          callsPerHours: callsPerHour,
+          intensity: intensity,
+          occupancy: parseFloat(occupancy).toFixed(2),
+          serviceLevel: parseFloat(serviceLevel).toFixed(2),
+          totalCallMinutes: callMinutes
         })
       });
     }
@@ -4880,6 +4920,14 @@ var App = /*#__PURE__*/function (_Component) {
           return value;
           break;
       }
+    }
+    // https://stackoverflow.com/questions/3959211/what-is-the-fastest-factorial-function-in-javascript
+  }, {
+    key: "getFactorial",
+    value: function getFactorial(num) {
+      var rval = 1;
+      for (var i = 2; i <= num; i++) rval = rval * i;
+      return rval;
     }
   }, {
     key: "showResults",
@@ -5128,7 +5176,7 @@ var Results = /*#__PURE__*/function (_Component) {
                   }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
                     className: "d-block fs-3 mt-2",
                     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("strong", {
-                      children: this.props.results.calls
+                      children: this.props.dataSet.incomingCalls
                     })
                   })]
                 })]
@@ -5534,7 +5582,7 @@ var Table = /*#__PURE__*/function (_Component) {
                     value: this.state.weekWorkHours,
                     label: "%",
                     handleFieldChange: this.handleFieldChange,
-                    validations: "isExisty,isNumeric,isInt,percentageBoundaries",
+                    validations: "isExisty,isNumeric,percentageBoundaries",
                     validationError: this.state.validationErrors.weekWorkHoursBoundaries,
                     required: true
                   })

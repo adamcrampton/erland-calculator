@@ -36,7 +36,7 @@ class Results extends Component {
                                 <div className="col">
                                     <span className="d-block fs-6 mb-2">Calls</span>
                                     <FontAwesomeIcon icon={ faPhone } size="4x" className="r-violet" />
-                                    <span className="d-block fs-3 mt-2"><strong>{ this.props.results.calls }</strong></span>
+                                    <span className="d-block fs-3 mt-2"><strong>{ this.props.dataSet.incomingCalls }</strong></span>
                                 </div>
                             </div>
                         </div>
