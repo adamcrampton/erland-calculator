@@ -21,27 +21,27 @@ class Results extends Component {
                                 <div className="col">
                                     <div className="card">
                                         <div className="card-body">
-                                            <div className="card-title">Incoming<br />Calls</div>
+                                            <h5 className="card-title mb-2">Incoming<br />Calls</h5>
                                             <FontAwesomeIcon icon={ faPhone } size="3x" className="r-violet" />
-                                            <span className="d-block fs-3 mt-2"><strong>{ this.props.dataSet.incomingCalls }</strong></span>
+                                            <span className="badge bg bg-crayola d-block fs-5 mt-2"><strong>{ this.props.dataSet.incomingCalls }</strong></span>
                                         </div>
                                     </div>
                                 </div>
                                 <div className="col">
                                     <div className="card">
                                         <div className="card-body">
-                                            <div className="card-title">Calls<br />Per Hour</div>
+                                            <h5 className="card-title mb-2">Calls<br />Per Hour</h5>
                                             <FontAwesomeIcon icon={ faStopwatch } size="3x" className="sky" />
-                                            <span className="d-block fs-3 mt-2"><strong>{ this.props.results.callsPerHour }</strong></span>
+                                            <span className="badge bg bg-crayola d-block fs-5 mt-2"><strong>{ this.props.results.callsPerHour }</strong></span>
                                         </div>
                                     </div>
                                 </div>
                                 <div className="col">
                                     <div className="card">
                                         <div className="card-body">
-                                            <div className="card-title">Call Has<br />To Wait %</div>
+                                            <h5 className="card-title mb-2">Call Has<br />To Wait %</h5>
                                             <FontAwesomeIcon icon={ faUserClock } size="3x" className="pink" />
-                                            <span className="d-block fs-3 mt-2"><strong>{ this.props.results.serviceLevel }%</strong></span>
+                                            <span className="badge bg bg-crayola d-block fs-5 mt-2"><strong>{ this.props.results.serviceLevel }%</strong></span>
                                         </div>
                                     </div>
                                 </div>
@@ -50,27 +50,27 @@ class Results extends Component {
                                 <div className="col">
                                     <div className="card">
                                         <div className="card-body">
-                                            <div className="card-title">Calls Answered<br />Immediately</div>
+                                            <h5 className="card-title mb-2">Calls Answered<br />Immediately</h5>
                                             <FontAwesomeIcon icon={ faUserCheck } size="3x" className="u-violet" />
-                                            <span className="d-block fs-3 mt-2"><strong>{ this.props.results.occupancy }%</strong></span>
+                                            <span className="badge bg bg-crayola d-block fs-5 mt-2"><strong>{ this.props.results.occupancy }%</strong></span>
                                         </div>
                                     </div>
                                 </div>
                                 <div className="col">
                                     <div className="card">
                                         <div className="card-body">
-                                            <div className="card-title">Speed To<br />Answer</div>
+                                            <h5 className="card-title mb-2">Speed To<br />Answer</h5>
                                             <FontAwesomeIcon icon={ faTachometerAlt } size="3x" className="pumpkin" />
-                                            <span className="d-block fs-3 mt-2"><strong>{ this.props.results.speedToAnswer } secs</strong></span>
+                                            <span className="badge bg bg-crayola d-block fs-5 mt-2"><strong>{ this.props.results.speedToAnswer } secs</strong></span>
                                         </div>
                                     </div>
                                 </div>
                                 <div className="col">
                                     <div className="card">
                                         <div className="card-body">
-                                            <div className="card-title">Agents<br />Required</div>
-                                            <FontAwesomeIcon icon={ faHeadset } size="3x" className="melon" />
-                                            <span className="d-block fs-3 mt-2"><strong>{ this.props.results.agents }</strong></span>
+                                            <h5 className="card-title mb-2">Agents<br />Required</h5>
+                                            <FontAwesomeIcon icon={ faHeadset } size="3x" className="blue" />
+                                            <span className="badge bg bg-crayola d-block fs-5 mt-2"><strong>{ this.props.results.agents }</strong></span>
                                         </div>
                                     </div>
                                 </div>
@@ -79,18 +79,18 @@ class Results extends Component {
                                 <div className="col">
                                     <div className="card">
                                         <div className="card-body">
-                                            <div className="card-title">Service<br />Level</div>
+                                            <h5 className="card-title mb-2">Service<br />Level</h5>
                                             <FontAwesomeIcon icon={ faStar } size="3x" className="cambridge" />
-                                            <span className="d-block fs-3 mt-2"><strong>{ this.props.results.serviceLevel }%</strong></span>
+                                            <span className="badge bg bg-crayola d-block fs-5 mt-2"><strong>{ this.props.results.serviceLevel }%</strong></span>
                                         </div>
                                     </div>
                                 </div>
                                 <div className="col">
                                     <div className="card">
                                         <div className="card-body">
-                                            <div className="card-title">Occupancy<br />Rate</div>
+                                            <h5 className="card-title mb-2">Occupancy<br />Rate</h5>
                                             <FontAwesomeIcon icon={ faChartPie } size="3x" className="green" />
-                                            <span className="d-block fs-3 mt-2"><strong>{ this.props.results.occupancy }%</strong></span>
+                                            <span className="badge bg bg-crayola d-block fs-5 mt-2"><strong>{ this.props.results.occupancy }%</strong></span>
                                         </div>
                                     </div>
                                 </div>

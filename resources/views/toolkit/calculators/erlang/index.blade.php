@@ -41,9 +41,10 @@
                     <div class="row gx-5">
                         <div class="col-xxl-5 sticky-top h-100">
                             <div class="text-center text-xxl-start mt-5 pt-2">
-                                <h1 class="display-3 fw-bolder mb-5"><span class="text-gradient d-inline">Erlang Calculator</span></h1>
+                                <h1 class="display-3 fw-bolder mb-4"><span class="text-gradient d-inline">Call Center Erlang Calculator</span></h1>
                                 <div class="badge bg-gradient-primary-to-secondary text-white mb-2"><div class="text-uppercase">About This Calculator</div></div>
-                                <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+                                <p>The Call Centre Erlang Calculator is an easy to use tool for assisting call center managers, allowing them to determine how many agents are required in order to meet their Service Level.</p>
+                                <p>Simply complete the 5 fields in the form on the right and click <strong>Calculate</strong>. You'll be presented a calculated <strong>Agents Required</strong> value, but other related data to assist with decision making.
                             </div>
                         </div>
                         <div class="col-xxl-7">
@@ -56,7 +57,7 @@
                 </div>
             </section>
             <!-- Secondary Section-->
-            <section class="bg-light py-5">
+            <section class="bg-light py-5 d-none">
                 <div class="container px-5">
                     <div class="row gx-5 justify-content-center">
                         
@@ -68,7 +69,7 @@
         <footer class="bg-white py-4 mt-auto">
             <div class="container px-5">
                 <div class="row align-items-center justify-content-between flex-column flex-sm-row">
-                    <div class="col-auto"><div class="small m-0">Copyright &copy; 2023</div></div>
+                    <div class="col-auto"><div class="small m-0">Copyright Amy Gibson &copy; 2023</div></div>
                 </div>
             </div>
         </footer>

@@ -8,7 +8,7 @@ class Card extends Component {
     }
     render() {
         return (
-            <div className="card accordion-item">
+            <div className="card accordion-item mb-1">
                 <div className="card-header">
                     <button 
                         className="bg bg-skobe text-white accordion-button" 

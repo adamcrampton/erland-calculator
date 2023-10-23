@@ -114,3 +114,6 @@ body {
 #root .card.accordion-item .card-header {
   padding: 0;
 }
+#root .card {
+  border: solid 1px #0b7a75;
+}
