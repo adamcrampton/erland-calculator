@@ -10,7 +10,7 @@ class Results extends Component {
         return (
             <div className="card accordion-item">
                 <div className="card-header">
-                    <button className="bg-primary text-white accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-results" aria-expanded="false" aria-controls="collapse-results">
+                    <button className="bg-primary text-white accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-results" aria-expanded="false" aria-controls="collapse-results" disabled={ !this.props.dataSet.hasOwnProperty('applyShrinkage') }>
                         Results
                     </button>
                 </div>

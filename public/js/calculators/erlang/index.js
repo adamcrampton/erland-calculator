@@ -5144,6 +5144,7 @@ var Results = /*#__PURE__*/function (_Component) {
             "data-bs-target": "#collapse-results",
             "aria-expanded": "false",
             "aria-controls": "collapse-results",
+            disabled: !this.props.dataSet.hasOwnProperty('applyShrinkage'),
             children: "Results"
           })
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
