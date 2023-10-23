@@ -5385,10 +5385,10 @@ var Table = /*#__PURE__*/function (_Component) {
                       children: "Incoming Calls"
                     })
                   }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_common_ui_CommonPopover__WEBPACK_IMPORTED_MODULE_1__["default"], {
-                    headingId: "newHeading",
+                    headingId: "incomingCalls",
                     headingclassName: "h3",
-                    headingContent: "Heading Text",
-                    bodyContent: "Some text for the body",
+                    headingContent: "Incoming Calls",
+                    bodyContent: "The number of calls received within the specified Time Period (field below).",
                     placement: "top"
                   })]
                 }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("td", {
@@ -5411,10 +5411,10 @@ var Table = /*#__PURE__*/function (_Component) {
                       children: "Time Period"
                     })
                   }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_common_ui_CommonPopover__WEBPACK_IMPORTED_MODULE_1__["default"], {
-                    headingId: "newHeading",
+                    headingId: "timePeriod",
                     headingclassName: "h3",
-                    headingContent: "Heading Text",
-                    bodyContent: "Some text for the body",
+                    headingContent: "Time Period",
+                    bodyContent: "Length of time measured for Incoming Calls (field above).",
                     placement: "top"
                   })]
                 }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("td", {
@@ -5443,10 +5443,10 @@ var Table = /*#__PURE__*/function (_Component) {
                       children: "Average Handle Time"
                     })
                   }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_common_ui_CommonPopover__WEBPACK_IMPORTED_MODULE_1__["default"], {
-                    headingId: "newHeading",
+                    headingId: "averageHandleTime",
                     headingclassName: "h3",
-                    headingContent: "Heading Text",
-                    bodyContent: "Some text for the body",
+                    headingContent: "Average Handle Time (AHT)",
+                    bodyContent: "The average amount of time (in seconds) that an agent spends handling a customer's call.",
                     placement: "top"
                   })]
                 }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("td", {
@@ -5473,10 +5473,10 @@ var Table = /*#__PURE__*/function (_Component) {
                       children: "Target Answer Time"
                     })
                   }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_common_ui_CommonPopover__WEBPACK_IMPORTED_MODULE_1__["default"], {
-                    headingId: "newHeading",
+                    headingId: "targetAnswerTime",
                     headingclassName: "h3",
-                    headingContent: "Heading Text",
-                    bodyContent: "Some text for the body",
+                    headingContent: "Target Answer Time",
+                    bodyContent: "Time frame target (in seconds) for which it takes the call center to take a call.",
                     placement: "top"
                   })]
                 }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("td", {
@@ -5506,10 +5506,10 @@ var Table = /*#__PURE__*/function (_Component) {
                       onChange: this.handleCheckboxChange
                     })]
                   }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_common_ui_CommonPopover__WEBPACK_IMPORTED_MODULE_1__["default"], {
-                    headingId: "newHeading",
+                    headingId: "shrinkage",
                     headingclassName: "h3",
-                    headingContent: "Heading Text",
-                    bodyContent: "Some text for the body",
+                    headingContent: "Shrinkage",
+                    bodyContent: "An estimated percentage of time than an agent is being paid in a shift but not able to take calls - such as meetings, calling in sick, or planned vacation. Use the checkbox to include or exclude Shrinkage from the calculation.",
                     placement: "top"
                   })]
                 }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("td", {
@@ -5927,6 +5927,7 @@ var CommonPopover = /*#__PURE__*/function (_Component) {
         as: _this.props.headingClass,
         children: _this.props.headingContent
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__["default"].Body, {
+        as: "div",
         children: _this.props.bodyContent
       })]
     });

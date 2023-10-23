@@ -11,7 +11,7 @@ class CommonPopover extends Component {
         this.popover = (
             <Popover id={ this.props.headingId }>
               <Popover.Header as={ this.props.headingClass }>{ this.props.headingContent }</Popover.Header>
-              <Popover.Body>{ this.props.bodyContent }</Popover.Body>
+              <Popover.Body as="div">{ this.props.bodyContent }</Popover.Body>
             </Popover>
           );
     }

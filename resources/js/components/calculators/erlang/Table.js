@@ -71,10 +71,10 @@ class Table extends Component {
                                     <strong>Incoming Calls</strong>
                                 </label>
                                 <CommonPopover
-                                    headingId="newHeading"
+                                    headingId="incomingCalls"
                                     headingclassName="h3"  
-                                    headingContent="Heading Text"
-                                    bodyContent="Some text for the body"
+                                    headingContent="Incoming Calls"
+                                    bodyContent="The number of calls received within the specified Time Period (field below)."
                                     placement="top"
                                 />
                             </td>
@@ -97,10 +97,10 @@ class Table extends Component {
                                     <strong>Time Period</strong>
                                 </label>
                                 <CommonPopover
-                                    headingId="newHeading"
+                                    headingId="timePeriod"
                                     headingclassName="h3"  
-                                    headingContent="Heading Text"
-                                    bodyContent="Some text for the body"
+                                    headingContent="Time Period"
+                                    bodyContent="Length of time measured for Incoming Calls (field above)."
                                     placement="top"
                                 />
                             </td>
@@ -129,10 +129,10 @@ class Table extends Component {
                                     <strong>Average Handle Time</strong>
                                 </label>
                                 <CommonPopover
-                                    headingId="newHeading"
+                                    headingId="averageHandleTime"
                                     headingclassName="h3"  
-                                    headingContent="Heading Text"
-                                    bodyContent="Some text for the body"
+                                    headingContent="Average Handle Time (AHT)"
+                                    bodyContent="The average amount of time (in seconds) that an agent spends handling a customer's call."
                                     placement="top"
                                 />
                             </td>
@@ -186,10 +186,10 @@ class Table extends Component {
                                     <strong>Target Answer Time</strong>
                                 </label>
                                 <CommonPopover
-                                    headingId="newHeading"
+                                    headingId="targetAnswerTime"
                                     headingclassName="h3"  
-                                    headingContent="Heading Text"
-                                    bodyContent="Some text for the body"
+                                    headingContent="Target Answer Time"
+                                    bodyContent="Time frame target (in seconds) for which it takes the call center to take a call."
                                     placement="top"
                                 />
                             </td>
@@ -248,10 +248,10 @@ class Table extends Component {
                                     />
                                 </div>
                                 <CommonPopover
-                                    headingId="newHeading"
+                                    headingId="shrinkage"
                                     headingclassName="h3"  
-                                    headingContent="Heading Text"
-                                    bodyContent="Some text for the body"
+                                    headingContent="Shrinkage"
+                                    bodyContent="An estimated percentage of time than an agent is being paid in a shift but not able to take calls - such as meetings, calling in sick, or planned vacation. Use the checkbox to include or exclude Shrinkage from the calculation."
                                     placement="top"
                                 />
                             </td>
