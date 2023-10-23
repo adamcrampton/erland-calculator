@@ -4844,6 +4844,20 @@ var App = /*#__PURE__*/function (_Component) {
         })]
       });
     }
+    // Calculates various data points for the Results component using
+    // the following inputs and an Erlang calculation:
+    // - Incoming call count
+    // - Time period
+    // - Shrinkage (optional)
+    // - Target answer time
+    // - Average handle time
+    //
+    // The following fields are not implemented and could/should be a TODO:
+    // - Required Service Level
+    // - Max Occupancy
+    // - Average Patience
+    // - Week Work Hours
+    // - Report Interval
   }, {
     key: "calculate",
     value: function calculate(data) {
@@ -5136,9 +5150,9 @@ var Results = /*#__PURE__*/function (_Component) {
                 className: "row",
                 children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
                   className: "col",
-                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("span", {
                     className: "d-block fs-6 mb-2",
-                    children: "Agents"
+                    children: ["Agents", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("br", {}), "Required"]
                   }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_1__.FontAwesomeIcon, {
                     icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__.faHeadset,
                     size: "4x",
@@ -5151,9 +5165,9 @@ var Results = /*#__PURE__*/function (_Component) {
                   })]
                 }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
                   className: "col",
-                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("span", {
                     className: "d-block fs-6 mb-2",
-                    children: "Service Level"
+                    children: ["Service", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("br", {}), "Level"]
                   }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_1__.FontAwesomeIcon, {
                     icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__.faStopwatch,
                     size: "4x",
@@ -5166,9 +5180,9 @@ var Results = /*#__PURE__*/function (_Component) {
                   })]
                 }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
                   className: "col",
-                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("span", {
                     className: "d-block fs-6 mb-2",
-                    children: "Occupancy"
+                    children: ["Occupancy", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("br", {}), "Rate"]
                   }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_1__.FontAwesomeIcon, {
                     icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__.faChartPie,
                     size: "4x",
@@ -5181,9 +5195,9 @@ var Results = /*#__PURE__*/function (_Component) {
                   })]
                 }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
                   className: "col",
-                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("span", {
                     className: "d-block fs-6 mb-2",
-                    children: "Calls"
+                    children: ["Incoming", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("br", {}), "Calls"]
                   }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_1__.FontAwesomeIcon, {
                     icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__.faPhone,
                     size: "4x",
@@ -5445,33 +5459,6 @@ var Table = /*#__PURE__*/function (_Component) {
                   children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("label", {
                     className: "form-label",
                     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("strong", {
-                      children: "Required Service Level"
-                    })
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_common_ui_CommonPopover__WEBPACK_IMPORTED_MODULE_1__["default"], {
-                    headingId: "newHeading",
-                    headingclassName: "h3",
-                    headingContent: "Heading Text",
-                    bodyContent: "Some text for the body",
-                    placement: "top"
-                  })]
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("td", {
-                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_common_forms_FormGroupInput__WEBPACK_IMPORTED_MODULE_5__["default"], {
-                    className: "form-control form-control-sm",
-                    name: "serviceLevel",
-                    type: "number",
-                    value: this.state.serviceLevel,
-                    label: "%",
-                    handleFieldChange: this.handleFieldChange,
-                    validations: "isExisty,isNumeric,isInt,percentageBoundaries",
-                    validationError: this.state.validationErrors.percentageBoundaries,
-                    required: true
-                  })
-                })]
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("tr", {
-                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("td", {
-                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("label", {
-                    className: "form-label",
-                    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("strong", {
                       children: "Target Answer Time"
                     })
                   }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_common_ui_CommonPopover__WEBPACK_IMPORTED_MODULE_1__["default"], {
@@ -5499,33 +5486,6 @@ var Table = /*#__PURE__*/function (_Component) {
                   children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("label", {
                     className: "form-label",
                     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("strong", {
-                      children: "Max Occupancy"
-                    })
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_common_ui_CommonPopover__WEBPACK_IMPORTED_MODULE_1__["default"], {
-                    headingId: "newHeading",
-                    headingclassName: "h3",
-                    headingContent: "Heading Text",
-                    bodyContent: "Some text for the body",
-                    placement: "top"
-                  })]
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("td", {
-                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_common_forms_FormGroupInput__WEBPACK_IMPORTED_MODULE_5__["default"], {
-                    className: "form-control form-control-sm",
-                    name: "maxOccupancy",
-                    type: "number",
-                    value: this.state.maxOccupancy,
-                    label: "%",
-                    handleFieldChange: this.handleFieldChange,
-                    validations: "isExisty,isNumeric,isInt,percentageBoundaries",
-                    validationError: this.state.validationErrors.percentageBoundaries,
-                    required: true
-                  })
-                })]
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("tr", {
-                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("td", {
-                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("label", {
-                    className: "form-label",
-                    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("strong", {
                       children: "Shrinkage"
                     })
                   }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_common_ui_CommonPopover__WEBPACK_IMPORTED_MODULE_1__["default"], {
@@ -5545,87 +5505,6 @@ var Table = /*#__PURE__*/function (_Component) {
                     handleFieldChange: this.handleFieldChange,
                     validations: "isExisty,isNumeric,isInt,percentageBoundaries",
                     validationError: this.state.validationErrors.percentageBoundaries,
-                    required: true
-                  })
-                })]
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("tr", {
-                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("td", {
-                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("label", {
-                    className: "form-label",
-                    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("strong", {
-                      children: "Average Patience"
-                    })
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_common_ui_CommonPopover__WEBPACK_IMPORTED_MODULE_1__["default"], {
-                    headingId: "newHeading",
-                    headingclassName: "h3",
-                    headingContent: "Heading Text",
-                    bodyContent: "Some text for the body",
-                    placement: "top"
-                  })]
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("td", {
-                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_common_forms_FormGroupInput__WEBPACK_IMPORTED_MODULE_5__["default"], {
-                    className: "form-control form-control-sm",
-                    name: "averagePatience",
-                    type: "number",
-                    value: this.state.averagePatience,
-                    label: "Seconds",
-                    handleFieldChange: this.handleFieldChange,
-                    validations: "isExisty,isNumeric,isInt,averagePatienceBoundaries",
-                    validationError: this.state.validationErrors.averagePatienceBoundaries,
-                    required: true
-                  })
-                })]
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("tr", {
-                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("td", {
-                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("label", {
-                    className: "form-label",
-                    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("strong", {
-                      children: "Week Work Hours"
-                    })
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_common_ui_CommonPopover__WEBPACK_IMPORTED_MODULE_1__["default"], {
-                    headingId: "newHeading",
-                    headingclassName: "h3",
-                    headingContent: "Heading Text",
-                    bodyContent: "Some text for the body",
-                    placement: "top"
-                  })]
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("td", {
-                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_common_forms_FormGroupInput__WEBPACK_IMPORTED_MODULE_5__["default"], {
-                    className: "form-control form-control-sm",
-                    name: "weekWorkHours",
-                    type: "number",
-                    value: this.state.weekWorkHours,
-                    label: "%",
-                    handleFieldChange: this.handleFieldChange,
-                    validations: "isExisty,isNumeric,percentageBoundaries",
-                    validationError: this.state.validationErrors.weekWorkHoursBoundaries,
-                    required: true
-                  })
-                })]
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("tr", {
-                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("td", {
-                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("label", {
-                    className: "form-label",
-                    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("strong", {
-                      children: "Report Interval"
-                    })
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_common_ui_CommonPopover__WEBPACK_IMPORTED_MODULE_1__["default"], {
-                    headingId: "newHeading",
-                    headingclassName: "h3",
-                    headingContent: "Heading Text",
-                    bodyContent: "Some text for the body",
-                    placement: "top"
-                  })]
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("td", {
-                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_common_forms_FormGroupInput__WEBPACK_IMPORTED_MODULE_5__["default"], {
-                    className: "form-control form-control-sm",
-                    name: "reportInterval",
-                    type: "number",
-                    value: this.state.reportInterval,
-                    label: "Minutes",
-                    handleFieldChange: this.handleFieldChange,
-                    validations: "isExisty,isNumeric,isInt,reportIntervalBoundaries",
-                    validationError: this.state.validationErrors.reportIntervalBoundaries,
                     required: true
                   })
                 })]

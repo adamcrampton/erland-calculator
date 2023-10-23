@@ -19,22 +19,22 @@ class Results extends Component {
                         <div className="result-icons w-100 text-center">
                             <div className="row">
                                 <div className="col">
-                                    <span className="d-block fs-6 mb-2">Agents</span>
+                                    <span className="d-block fs-6 mb-2">Agents<br />Required</span>
                                     <FontAwesomeIcon icon={ faHeadset } size="4x" className="blue" />
                                     <span className="d-block fs-3 mt-2"><strong>{ this.props.results.agents }</strong></span>
                                 </div>
                                 <div className="col">
-                                    <span className="d-block fs-6 mb-2">Service Level</span>
+                                    <span className="d-block fs-6 mb-2">Service<br />Level</span>
                                     <FontAwesomeIcon icon={ faStopwatch } size="4x" className="pink" />
                                     <span className="d-block fs-3 mt-2"><strong>{ this.props.results.serviceLevel }</strong>%</span>
                                 </div>
                                 <div className="col">
-                                    <span className="d-block fs-6 mb-2">Occupancy</span>
+                                    <span className="d-block fs-6 mb-2">Occupancy<br />Rate</span>
                                     <FontAwesomeIcon icon={ faChartPie } size="4x" className="u-violet" />
                                     <span className="d-block fs-3 mt-2"><strong>{ this.props.results.occupancy }</strong>%</span>
                                 </div>
                                 <div className="col">
-                                    <span className="d-block fs-6 mb-2">Calls</span>
+                                    <span className="d-block fs-6 mb-2">Incoming<br />Calls</span>
                                     <FontAwesomeIcon icon={ faPhone } size="4x" className="r-violet" />
                                     <span className="d-block fs-3 mt-2"><strong>{ this.props.dataSet.incomingCalls }</strong></span>
                                 </div>

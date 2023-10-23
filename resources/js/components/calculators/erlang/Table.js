@@ -150,7 +150,8 @@ class Table extends Component {
                                 </div>
                             </td>
                         </tr>
-                        <tr>
+                        {/* To be implemented in the future */}
+                        {/* <tr>
                             <td>
                                 <label className="form-label">
                                     <strong>Required Service Level</strong>
@@ -176,7 +177,7 @@ class Table extends Component {
                                     required
                                 />
                             </td>
-                        </tr>
+                        </tr> */}
                         <tr>
                             <td>
                                 <label className="form-label">
@@ -204,7 +205,8 @@ class Table extends Component {
                                 />
                             </td>
                         </tr>
-                        <tr>
+                        {/* To be implemented in the future */}
+                        {/* <tr>
                             <td>
                                 <label className="form-label">
                                     <strong>Max Occupancy</strong>
@@ -230,7 +232,7 @@ class Table extends Component {
                                     required
                                 />
                             </td>
-                        </tr>
+                        </tr> */}
                         <tr>
                             <td>
                                 <label className="form-label">
@@ -258,7 +260,8 @@ class Table extends Component {
                                 />
                             </td>
                         </tr>
-                        <tr>
+                        {/* To be implemented in the future */}
+                        {/* <tr>
                             <td>
                                 <label className="form-label">
                                     <strong>Average Patience</strong>
@@ -284,8 +287,9 @@ class Table extends Component {
                                     required
                                 />
                             </td>
-                        </tr>
-                        <tr>
+                        </tr> */}
+                        {/* To be implemented in the future */}
+                        {/* <tr>
                             <td>
                                 <label className="form-label">
                                     <strong>Week Work Hours</strong>
@@ -311,8 +315,9 @@ class Table extends Component {
                                     required
                                 />
                             </td>
-                        </tr>
-                        <tr>
+                        </tr> */}
+                        {/* To be implemented in the future */}
+                        {/* <tr>
                             <td>
                                 <label className="form-label">
                                     <strong>Report Interval</strong>
@@ -338,7 +343,7 @@ class Table extends Component {
                                     required
                                 />
                             </td>
-                        </tr>
+                        </tr> */}
                     </tbody>
                 </table>
                 <div className="text-center">

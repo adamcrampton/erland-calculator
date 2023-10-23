@@ -56,6 +56,20 @@ class App extends Component {
             </div>
         );
     }
+    // Calculates various data points for the Results component using
+    // the following inputs and an Erlang calculation:
+    // - Incoming call count
+    // - Time period
+    // - Shrinkage (optional)
+    // - Target answer time
+    // - Average handle time
+    //
+    // The following fields are not implemented and could/should be a TODO:
+    // - Required Service Level
+    // - Max Occupancy
+    // - Average Patience
+    // - Week Work Hours
+    // - Report Interval
     calculate(data) {
         // Make a copy and convert Time Period field.
         const dataSet = data;
