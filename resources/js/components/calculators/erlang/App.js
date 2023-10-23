@@ -7,24 +7,26 @@ class App extends Component {
     constructor(props) {
         super(props);
 
+        this.resultDefaults = {
+            agents: 0,
+            calls: 0,
+            callHasToWait: 0,
+            callsPerHour: 0,
+            immediateAnswer: 0,
+            intensity: 0,
+            occupancy: 0,
+            serviceLevel: 0,
+            shrinkage: 0,
+            speedToAnswer: 0,
+            totalCallMinutes: 0
+        };
+
         this.state = {
             applyShrinkage: true,
             cardVisible: true,
             dataSet: {},
             resultsVisible: false,
-            results: {
-                agents: 0,
-                calls: 0,
-                callHasToWait: 0,
-                callsPerHour: 0,
-                immediateAnswer: 0,
-                intensity: 0,
-                occupancy: 0,
-                serviceLevel: 0,
-                shrinkage: 0,
-                speedToAnswer: 0,
-                totalCallMinutes: 0
-            },
+            results: this.resultDefaults,
             selections: {
                 timePeriodUnits: 'minutes'
             }
@@ -180,6 +182,18 @@ class App extends Component {
     }
 
     startOver() {
+        // Reset values to default.
+        // #!#!#! does not work
+        this.setState({
+            applyShrinkage: true,
+            dataSet: {},
+            results: this.resultDefaults,
+            selections: {
+                timePeriodUnits: 'minutes'
+            }
+        });
+
+        // Reset collapse states.
         const form = document.getElementById('collapse-form');
         const results = document.getElementById('collapse-results');
         Collapse.getOrCreateInstance(results).hide();

@@ -4795,24 +4795,25 @@ var App = /*#__PURE__*/function (_Component) {
     var _this;
     _classCallCheck(this, App);
     _this = _super.call(this, props);
+    _this.resultDefaults = {
+      agents: 0,
+      calls: 0,
+      callHasToWait: 0,
+      callsPerHour: 0,
+      immediateAnswer: 0,
+      intensity: 0,
+      occupancy: 0,
+      serviceLevel: 0,
+      shrinkage: 0,
+      speedToAnswer: 0,
+      totalCallMinutes: 0
+    };
     _this.state = {
       applyShrinkage: true,
       cardVisible: true,
       dataSet: {},
       resultsVisible: false,
-      results: {
-        agents: 0,
-        calls: 0,
-        callHasToWait: 0,
-        callsPerHour: 0,
-        immediateAnswer: 0,
-        intensity: 0,
-        occupancy: 0,
-        serviceLevel: 0,
-        shrinkage: 0,
-        speedToAnswer: 0,
-        totalCallMinutes: 0
-      },
+      results: _this.resultDefaults,
       selections: {
         timePeriodUnits: 'minutes'
       }
@@ -4976,6 +4977,18 @@ var App = /*#__PURE__*/function (_Component) {
   }, {
     key: "startOver",
     value: function startOver() {
+      // Reset values to default.
+      // #!#!#! does not work
+      this.setState({
+        applyShrinkage: true,
+        dataSet: {},
+        results: this.resultDefaults,
+        selections: {
+          timePeriodUnits: 'minutes'
+        }
+      });
+
+      // Reset collapse states.
       var form = document.getElementById('collapse-form');
       var results = document.getElementById('collapse-results');
       bootstrap__WEBPACK_IMPORTED_MODULE_3__.Collapse.getOrCreateInstance(results).hide();
