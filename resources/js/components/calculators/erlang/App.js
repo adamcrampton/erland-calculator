@@ -8,7 +8,7 @@ class App extends Component {
         super(props);
 
         this.state = {
-            applyShrinkage: false,
+            applyShrinkage: true,
             cardVisible: true,
             dataSet: {},
             resultsVisible: false,

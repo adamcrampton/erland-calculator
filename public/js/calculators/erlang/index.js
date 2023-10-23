@@ -4796,7 +4796,7 @@ var App = /*#__PURE__*/function (_Component) {
     _classCallCheck(this, App);
     _this = _super.call(this, props);
     _this.state = {
-      applyShrinkage: false,
+      applyShrinkage: true,
       cardVisible: true,
       dataSet: {},
       resultsVisible: false,
@@ -5321,7 +5321,7 @@ var Table = /*#__PURE__*/function (_Component) {
     _this = _super.call(this, props);
     // Contains defaults for each field.
     _this.state = {
-      applyShrinkage: false,
+      applyShrinkage: true,
       canSubmit: false,
       calculateAllowed: 0,
       averagePatience: 60,
@@ -5503,7 +5503,8 @@ var Table = /*#__PURE__*/function (_Component) {
                       className: "form-check-input",
                       type: "checkbox",
                       id: "applyShrinkage",
-                      onChange: this.handleCheckboxChange
+                      onChange: this.handleCheckboxChange,
+                      defaultChecked: this.state.applyShrinkage
                     })]
                   }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_common_ui_CommonPopover__WEBPACK_IMPORTED_MODULE_1__["default"], {
                     headingId: "shrinkage",

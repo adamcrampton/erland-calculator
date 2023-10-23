@@ -10,7 +10,7 @@ class Table extends Component {
         super(props);
         // Contains defaults for each field.
         this.state = {
-            applyShrinkage: false,
+            applyShrinkage: true,
             canSubmit: false,
             calculateAllowed: 0,
             averagePatience: 60,
@@ -245,6 +245,7 @@ class Table extends Component {
                                         type="checkbox" 
                                         id="applyShrinkage" 
                                         onChange={ this.handleCheckboxChange }
+                                        defaultChecked={ this.state.applyShrinkage }
                                     />
                                 </div>
                                 <CommonPopover
