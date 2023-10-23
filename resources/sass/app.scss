@@ -1,4 +1,27 @@
+body {
+    padding-top: 4rem;
+}
 #root {
+    .bg {
+        &.bg-purple {
+            background-color: #392b58;
+        }
+        &.bg-u-violet {
+            background-color: #645e9d;
+        }
+        &.bg-pumpkin {
+            background-color: #ff6700;
+        }
+        &.bg-green {
+            background-color: #157f1f;
+        }
+        &.bg-crayola {
+            background-color: #f45b69;
+        }
+        &.bg-skobe {
+            background-color: #0b7a75;
+        }
+    }
     .btn {
         &.btn-blue {
             color: #ffffff;
@@ -20,23 +43,78 @@
             color: #ffffff;
             background-color: #2d0320;
         }
-
+        &.btn-mindaro {
+            color: #000000;
+            background-color: #e2ef70;
+        }
+        &.btn-melon {
+            color: #000000;
+            background-color: #ffc0be;
+        }
+        &.btn-cambridge {
+            color: #000000;
+            background-color: #9ec5ab;
+        }
+        &.btn-green {
+            color: #ffffff;
+            background-color: #157f1f;
+        }
+        &.btn-pumpkin {
+            color: #ffffff;
+            background-color: #ff6700;
+        }
+        &.btn-sky {
+            color: #ffffff;
+            background-color: #72ddf7;
+        }
+        &.crayola {
+            color: #ffffff;
+            background-color: #f45b69;
+        }
+        &.skobe {
+            color: #ffffff;
+            background-color: #0b7a75;
+        }
     }
     #card-results {
         .blue {
-            color: #1e30f3
+            color: #1e30f3;
         }
         .pink {
-            color: #e21e80
+            color: #e21e80;
         }
         .u-violet {
-            color: #645e9d
+            color: #645e9d;
         }
         .r-violet {
-            color: #392b58
+            color: #392b58;
         }
         .purple {
-            color: #2d0320
+            color: #2d0320;
+        }
+        .mindaro {
+            color: #e2ef70;
+        }
+        .melon {
+            color: #ffc0be;
+        }
+        .cambridge {
+            color: #9ec5ab;
+        }
+        .green {
+            color: #157f1f;
+        }
+        .pumpkin {
+            color: #ff6700;
+        }
+        .sky {
+            color: #72ddf7;
+        }
+        .crayola {
+            color: #f45b69;
+        }
+        .skobe {
+            color: #0b7a75;
         }
     }
     .card.accordion-item {

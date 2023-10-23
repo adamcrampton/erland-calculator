@@ -358,7 +358,7 @@ class Table extends Component {
                 </table>
                 <div className="text-center">
                     <button 
-                        className={"btn btn-sm btn-u-violet " + (this.state.canSubmit ? "" : "disabled") } 
+                        className={"btn btn-sm btn-r-violet " + (this.state.canSubmit ? "" : "disabled") } 
                         disabled={ !this.state.canSubmit }
                         onClick={ (evt) => this.props.triggerCalculated(evt, this.state) }
                         data-bs-toggle="collapse"

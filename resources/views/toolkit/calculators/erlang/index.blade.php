@@ -24,9 +24,9 @@
     <body class="d-flex flex-column h-100">
         <main class="flex-shrink-0">
             <!-- Navigation-->
-            <nav class="navbar navbar-expand-lg navbar-light bg-white py-3">
+            <nav class="navbar navbar-expand-lg navbar-light fixed-top bg-white py-3">
                 <div class="container px-5">
-                    <a class="navbar-brand" href="index.html"><span class="fw-bolder text-primary">Call Center Toolkit</span></a>
+                    <a class="navbar-brand" href="index.html"><span class="fw-bolder" style="color:#392b58;">Call Center Toolkit</span></a>
                     {{-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav ms-auto mb-2 mb-lg-0 small fw-bolder">
@@ -36,11 +36,11 @@
                 </div>
             </nav>
             <!-- Main Section-->
-            <section class="py-5">
+            <section class="py-3">
                 <div class="container px-5 pb-5">
                     <div class="row gx-5">
-                        <div class="col-xxl-5">
-                            <div class="text-center text-xxl-start">
+                        <div class="col-xxl-5 sticky-top h-100">
+                            <div class="text-center text-xxl-start mt-5 pt-2">
                                 <h1 class="display-3 fw-bolder mb-5"><span class="text-gradient d-inline">Erlang Calculator</span></h1>
                                 <div class="badge bg-gradient-primary-to-secondary text-white mb-2"><div class="text-uppercase">About This Calculator</div></div>
                                 <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>

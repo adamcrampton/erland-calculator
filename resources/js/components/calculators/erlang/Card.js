@@ -11,7 +11,7 @@ class Card extends Component {
             <div className="card accordion-item">
                 <div className="card-header">
                     <button 
-                        className="bg-primary text-white accordion-button" 
+                        className="bg bg-skobe text-white accordion-button" 
                         type="button" 
                         data-bs-toggle="collapse" 
                         data-bs-target="#collapse-form" 

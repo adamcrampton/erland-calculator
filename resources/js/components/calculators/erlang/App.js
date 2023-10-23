@@ -138,7 +138,7 @@ class App extends Component {
                 ...this.state.results,
                 agents: Math.round(agents),
                 callHasToWait: callHasToWait,
-                callsPerHours: callsPerHour,
+                callsPerHour: callsPerHour,
                 immediateAnswer: immediateAnswer,
                 intensity: intensity,
                 occupancy: parseFloat(occupancy).toFixed(2),

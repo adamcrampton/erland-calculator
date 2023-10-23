@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChartPie, faHeadset, faPhone, faStopwatch } from '@fortawesome/free-solid-svg-icons';
+import { faChartPie, faHeadset, faPhone, faStar, faStopwatch, faTachometerAlt, faUserCheck, faUserClock } from '@fortawesome/free-solid-svg-icons';
 
 class Results extends Component {
     constructor(props) {
@@ -10,33 +10,89 @@ class Results extends Component {
         return (
             <div className="card accordion-item">
                 <div className="card-header">
-                    <button className="bg-primary text-white accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-results" aria-expanded="false" aria-controls="collapse-results" disabled={ !this.props.dataSet.hasOwnProperty('applyShrinkage') }>
+                    <button className="bg bg-skobe text-white accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-results" aria-expanded="false" aria-controls="collapse-results" disabled={ !this.props.dataSet.hasOwnProperty('applyShrinkage') }>
                         Results
                     </button>
                 </div>
                 <div id="collapse-results" className={`card-body accordion-collapse collapse ${ this.props.visible && 'show'}`}>
                     <div id="card-results">
                         <div className="result-icons w-100 text-center">
+                            <div className="row mb-3">
+                                <div className="col">
+                                    <div className="card">
+                                        <div className="card-body">
+                                            <div className="card-title">Incoming<br />Calls</div>
+                                            <FontAwesomeIcon icon={ faPhone } size="3x" className="r-violet" />
+                                            <span className="d-block fs-3 mt-2"><strong>{ this.props.dataSet.incomingCalls }</strong></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="col">
+                                    <div className="card">
+                                        <div className="card-body">
+                                            <div className="card-title">Calls<br />Per Hour</div>
+                                            <FontAwesomeIcon icon={ faStopwatch } size="3x" className="sky" />
+                                            <span className="d-block fs-3 mt-2"><strong>{ this.props.results.callsPerHour }</strong></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="col">
+                                    <div className="card">
+                                        <div className="card-body">
+                                            <div className="card-title">Call Has<br />To Wait %</div>
+                                            <FontAwesomeIcon icon={ faUserClock } size="3x" className="pink" />
+                                            <span className="d-block fs-3 mt-2"><strong>{ this.props.results.serviceLevel }%</strong></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="row mb-3">
+                                <div className="col">
+                                    <div className="card">
+                                        <div className="card-body">
+                                            <div className="card-title">Calls Answered<br />Immediately</div>
+                                            <FontAwesomeIcon icon={ faUserCheck } size="3x" className="u-violet" />
+                                            <span className="d-block fs-3 mt-2"><strong>{ this.props.results.occupancy }%</strong></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="col">
+                                    <div className="card">
+                                        <div className="card-body">
+                                            <div className="card-title">Speed To<br />Answer</div>
+                                            <FontAwesomeIcon icon={ faTachometerAlt } size="3x" className="pumpkin" />
+                                            <span className="d-block fs-3 mt-2"><strong>{ this.props.results.speedToAnswer } secs</strong></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="col">
+                                    <div className="card">
+                                        <div className="card-body">
+                                            <div className="card-title">Agents<br />Required</div>
+                                            <FontAwesomeIcon icon={ faHeadset } size="3x" className="melon" />
+                                            <span className="d-block fs-3 mt-2"><strong>{ this.props.results.agents }</strong></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             <div className="row">
                                 <div className="col">
-                                    <span className="d-block fs-6 mb-2">Agents<br />Required</span>
-                                    <FontAwesomeIcon icon={ faHeadset } size="4x" className="blue" />
-                                    <span className="d-block fs-3 mt-2"><strong>{ this.props.results.agents }</strong></span>
+                                    <div className="card">
+                                        <div className="card-body">
+                                            <div className="card-title">Service<br />Level</div>
+                                            <FontAwesomeIcon icon={ faStar } size="3x" className="cambridge" />
+                                            <span className="d-block fs-3 mt-2"><strong>{ this.props.results.serviceLevel }%</strong></span>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div className="col">
-                                    <span className="d-block fs-6 mb-2">Service<br />Level</span>
-                                    <FontAwesomeIcon icon={ faStopwatch } size="4x" className="pink" />
-                                    <span className="d-block fs-3 mt-2"><strong>{ this.props.results.serviceLevel }</strong>%</span>
-                                </div>
-                                <div className="col">
-                                    <span className="d-block fs-6 mb-2">Occupancy<br />Rate</span>
-                                    <FontAwesomeIcon icon={ faChartPie } size="4x" className="u-violet" />
-                                    <span className="d-block fs-3 mt-2"><strong>{ this.props.results.occupancy }</strong>%</span>
-                                </div>
-                                <div className="col">
-                                    <span className="d-block fs-6 mb-2">Incoming<br />Calls</span>
-                                    <FontAwesomeIcon icon={ faPhone } size="4x" className="r-violet" />
-                                    <span className="d-block fs-3 mt-2"><strong>{ this.props.dataSet.incomingCalls }</strong></span>
+                                    <div className="card">
+                                        <div className="card-body">
+                                            <div className="card-title">Occupancy<br />Rate</div>
+                                            <FontAwesomeIcon icon={ faChartPie } size="3x" className="green" />
+                                            <span className="d-block fs-3 mt-2"><strong>{ this.props.results.occupancy }%</strong></span>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
