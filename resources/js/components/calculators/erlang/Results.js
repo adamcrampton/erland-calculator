@@ -42,10 +42,10 @@ class Results extends Component {
                         </div>
                         <div className="result-summary mt-2">
                             <h4 className="mt-3">Summary</h4>
-                            These calculations are based on <strong>{ this.props.dataSet.incomingCalls }</strong> incoming calls over a period of <strong>{ this.props.dataSet.timePeriod } { this.props.selections.timePeriodUnits }
-                            </strong>.
+                            These calculations are based on <strong>{ this.props.dataSet.incomingCalls }</strong> incoming calls over a period of <strong>{ this.props.dataSet.timePeriod } { this.props.selections.timePeriodUnits }</strong>.
                             <h4 className="mt-3">Your Results</h4>
-                            <p className="card-text">The number of agents required is <strong>{ this.props.results.agents }</strong>, which includes a shrinkage factor of <strong>{ this.props.results.shrinkage }</strong>.</p>
+                            <p className="card-text">The number of agents required is <strong>{ this.props.results.agents }</strong>.</p>
+                            { this.props.applyShrinkage && <p>This includes a shrinkage factor of <strong>{ this.props.results.shrinkage }%</strong>.</p> } 
                             <p className="card-text">Based on the above data, the Service Level Calculated is <strong>{ this.props.results.serviceLevel }</strong>, with an Average Speed To Answer of <strong>{ this.props.results.speedToAnswer } seconds</strong>.</p>
                         </div>
                         <div className="text-center mt-2">

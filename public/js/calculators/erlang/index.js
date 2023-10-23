@@ -4796,6 +4796,7 @@ var App = /*#__PURE__*/function (_Component) {
     _classCallCheck(this, App);
     _this = _super.call(this, props);
     _this.state = {
+      applyShrinkage: false,
       cardVisible: true,
       dataSet: {},
       resultsVisible: false,
@@ -4835,6 +4836,7 @@ var App = /*#__PURE__*/function (_Component) {
           visible: this.state.cardVisible
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_Results__WEBPACK_IMPORTED_MODULE_2__["default"], {
           dataSet: this.state.dataSet,
+          applyShrinkage: this.state.applyShrinkage,
           results: this.state.results,
           showResults: this.showResults,
           startOver: this.startOver,
@@ -4865,6 +4867,11 @@ var App = /*#__PURE__*/function (_Component) {
       var dataSet = data;
       dataSet.timePeriod = this.convertToMinutes(data.timePeriod, 'minutes');
 
+      // Set shrinkage toggle.
+      this.setState({
+        applyShrinkage: data.applyShrinkage
+      });
+
       // Process calculations using Erlang C Formula.
       // See: https://www.callcentrehelper.com/erlang-c-formula-example-121281.htm
       // =====================
@@ -4876,7 +4883,7 @@ var App = /*#__PURE__*/function (_Component) {
       var occupancy = intensity / agents * 100;
 
       // Update if Shrinkage is a factor.
-      if (data.shrinkage) {
+      if (data.applyShrinkage) {
         agents = agents / (1 - data.shrinkage / 100);
       }
 
@@ -5226,8 +5233,10 @@ var Results = /*#__PURE__*/function (_Component) {
                 className: "card-text",
                 children: ["The number of agents required is ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("strong", {
                   children: this.props.results.agents
-                }), ", which includes a shrinkage factor of ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("strong", {
-                  children: this.props.results.shrinkage
+                }), "."]
+              }), this.props.applyShrinkage && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("p", {
+                children: ["This includes a shrinkage factor of ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("strong", {
+                  children: [this.props.results.shrinkage, "%"]
                 }), "."]
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("p", {
                 className: "card-text",
@@ -5312,6 +5321,7 @@ var Table = /*#__PURE__*/function (_Component) {
     _this = _super.call(this, props);
     // Contains defaults for each field.
     _this.state = {
+      applyShrinkage: false,
       canSubmit: false,
       calculateAllowed: 0,
       averagePatience: 60,
@@ -5350,6 +5360,7 @@ var Table = /*#__PURE__*/function (_Component) {
     _this.setupValidators();
 
     // State change handlers.
+    _this.handleCheckboxChange = _this.handleCheckboxChange.bind(_assertThisInitialized(_this));
     _this.handleFieldChange = _this.handleFieldChange.bind(_assertThisInitialized(_this));
     _this.handleTimePeriodUnitChange = _this.handleTimePeriodUnitChange.bind(_assertThisInitialized(_this));
     return _this;
@@ -5483,11 +5494,17 @@ var Table = /*#__PURE__*/function (_Component) {
                 })]
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("tr", {
                 children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("td", {
-                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("label", {
-                    className: "form-label",
-                    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("strong", {
-                      children: "Shrinkage"
-                    })
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+                    className: "form-check form-check-inline",
+                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("strong", {
+                      children: "Apply Shrinkage"
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("input", {
+                      name: "applyShrinkage",
+                      className: "form-check-input",
+                      type: "checkbox",
+                      id: "applyShrinkage",
+                      onChange: this.handleCheckboxChange
+                    })]
                   }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_common_ui_CommonPopover__WEBPACK_IMPORTED_MODULE_1__["default"], {
                     headingId: "newHeading",
                     headingclassName: "h3",
@@ -5541,6 +5558,11 @@ var Table = /*#__PURE__*/function (_Component) {
       this.setState({
         canSubmit: true
       });
+    }
+  }, {
+    key: "handleCheckboxChange",
+    value: function handleCheckboxChange(evt) {
+      this.setState(_defineProperty({}, evt.target.name, evt.target.checked));
     }
   }, {
     key: "handleFieldChange",

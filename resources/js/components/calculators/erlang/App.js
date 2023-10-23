@@ -8,6 +8,7 @@ class App extends Component {
         super(props);
 
         this.state = {
+            applyShrinkage: false,
             cardVisible: true,
             dataSet: {},
             resultsVisible: false,
@@ -46,6 +47,7 @@ class App extends Component {
                 />
                 <Results
                     dataSet={ this.state.dataSet }
+                    applyShrinkage={ this.state.applyShrinkage }
                     results={ this.state.results }
                     showResults={ this.showResults }
                     startOver={ this.startOver }
@@ -75,6 +77,9 @@ class App extends Component {
         const dataSet = data;
         dataSet.timePeriod = this.convertToMinutes(data.timePeriod, 'minutes');
 
+        // Set shrinkage toggle.
+        this.setState({ applyShrinkage: data.applyShrinkage });
+
         // Process calculations using Erlang C Formula.
         // See: https://www.callcentrehelper.com/erlang-c-formula-example-121281.htm
         // =====================
@@ -86,7 +91,7 @@ class App extends Component {
         const occupancy = (intensity / agents) * 100;
 
         // Update if Shrinkage is a factor.
-        if (data.shrinkage) {
+        if (data.applyShrinkage) {
             agents = agents / (1 - (data.shrinkage / 100));
         }
 

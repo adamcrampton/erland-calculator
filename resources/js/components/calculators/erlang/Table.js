@@ -10,6 +10,7 @@ class Table extends Component {
         super(props);
         // Contains defaults for each field.
         this.state = {
+            applyShrinkage: false,
             canSubmit: false,
             calculateAllowed: 0,
             averagePatience: 60,
@@ -50,6 +51,7 @@ class Table extends Component {
         this.setupValidators();
 
         // State change handlers.
+        this.handleCheckboxChange = this.handleCheckboxChange.bind(this);
         this.handleFieldChange = this.handleFieldChange.bind(this);
         this.handleTimePeriodUnitChange = this.handleTimePeriodUnitChange.bind(this);
     }
@@ -235,9 +237,16 @@ class Table extends Component {
                         </tr> */}
                         <tr>
                             <td>
-                                <label className="form-label">
-                                    <strong>Shrinkage</strong>
-                                </label>
+                                <div className="form-check form-check-inline">
+                                    <strong>Apply Shrinkage</strong>
+                                    <input 
+                                        name="applyShrinkage"
+                                        className="form-check-input" 
+                                        type="checkbox" 
+                                        id="applyShrinkage" 
+                                        onChange={ this.handleCheckboxChange }
+                                    />
+                                </div>
                                 <CommonPopover
                                     headingId="newHeading"
                                     headingclassName="h3"  
@@ -369,6 +378,11 @@ class Table extends Component {
     
     enableButton() {
         this.setState({ canSubmit: true });
+    }
+    handleCheckboxChange(evt) {
+        this.setState({
+            [evt.target.name]: evt.target.checked
+        });
     }
     handleFieldChange(evt) {
         this.setState({
